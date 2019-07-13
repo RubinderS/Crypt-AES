@@ -31,5 +31,8 @@
     "prettier": "^1.18.2",
     "prettier-eslint": "^9.0.0",
     "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "utils": "github:rubinder25/utils#master"
   }
 }
