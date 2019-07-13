@@ -1,0 +1,35 @@
+{
+  "name": "crypter",
+  "version": "1.0.0",
+  "description": "node-crypter",
+  "main": "./build/index.js",
+  "scripts": {
+    "test": "jest --verbose ./__tests__",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rubinder25/node-crypter.git"
+  },
+  "keywords": [
+    "encryption",
+    "aes"
+  ],
+  "author": "Rubinder Singh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rubinder25/node-crypter/issues"
+  },
+  "homepage": "https://github.com/Rubinder25/node-crypter#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "eslint": "^6.0.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jest": "^24.8.0",
+    "prettier": "^1.18.2",
+    "prettier-eslint": "^9.0.0",
+    "typescript": "^3.5.3"
+  }
+}
