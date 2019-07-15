@@ -1,4 +1,4 @@
-import {ICLIArgsType, IOptionsType} from './types';
+import {ICLIArgsType, IMainOptionsType} from './types';
 // import {isOption} from './commands/Utils';
 
 function version(): void {
@@ -9,7 +9,7 @@ function help(): void {
   console.log('help');
 }
 
-const mainOptions: IOptionsType = {
+const mainOptions: IMainOptionsType = {
   '--version': version,
   '-v': version,
   '--help': help,

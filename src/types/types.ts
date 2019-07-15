@@ -11,7 +11,7 @@ interface ICLIArgsType {
   val: string;
 }
 
-interface IOptionsType {
+interface IMainOptionsType {
   [key: string]: (val?:string) => void;
 }
 

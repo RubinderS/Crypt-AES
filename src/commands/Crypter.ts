@@ -1,12 +1,16 @@
 #!/usr/bin/env node
 
 /**
- * encrypt <filename or dirname> <password>
+ * encrypt
+ * -s <filename or dirname>
+ * -p <password>
  * -d(optional delete the files after finish)
  * -noext(optional don't add enc extension and keep the original file name)
  * -out (optional ) <output directory>
  *
- * decrypt <filename or dirname> <password>
+ * decrypt
+ * -s <filename or dirname>
+ * -p <password>
  * -d(optional delete the files after finish)
  * -noext(optional check for any file instead of just the -noext files)
  * -out
