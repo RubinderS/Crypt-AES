@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // import {aes} from 'utils';
 import {processMainOptions} from './ProcessMainOptions';
 import {processCommands} from './commands';
@@ -26,7 +27,9 @@ function getOptionsFromCLI(): CLIArgsType[] {
 function main(): void {
   const cliArgs = getOptionsFromCLI();
   if (cliArgs.length !== 0) {
-    isOption(cliArgs[0].option) ? processMainOptions(cliArgs) : processCommands(cliArgs);
+    isOption(cliArgs[0].option)
+      ? processMainOptions(cliArgs)
+      : processCommands(cliArgs);
   }
 }
 

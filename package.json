@@ -2,10 +2,12 @@
   "name": "crypter",
   "version": "1.0.0",
   "description": "node-crypter",
-  "main": "./build/index.js",
   "scripts": {
     "test": "jest --verbose ./__tests__",
     "build": "tsc"
+  },
+  "bin": {
+    "node-crypter": "build/Cli.js"
   },
   "repository": {
     "type": "git",
