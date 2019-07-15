@@ -13,6 +13,7 @@ function decryptCmd(cliArgs: CLIArgsType[]): void {
     if (path.extname(filePath) === extension) {
       const extRegex = new RegExp(`${extension}$`, 'g');
       let destFilePath = '';
+
       if (cryptConfig.destPath) {
         cryptConfig.destPath = path.normalize(cryptConfig.destPath + path.sep);
         destFilePath = path
@@ -21,7 +22,9 @@ function decryptCmd(cliArgs: CLIArgsType[]): void {
       } else {
         destFilePath = filePath.replace(extRegex, '');
       }
+
       mkdirIfNotExist(path.dirname(destFilePath));
+      
       decrypt(filePath, destFilePath, cryptConfig.pswrd, (decryptedFilePath: string) => {
         console.log(`File ${index} - ${decryptedFilePath} decrypted successfuly`);
         if (cryptConfig.delSrc) {
