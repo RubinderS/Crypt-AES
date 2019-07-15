@@ -9,11 +9,23 @@ module.exports = {
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
   },
-  "rules": {
-    "prefer-const": ["error", {
-      "destructuring": "any",
-      "ignoreReadBeforeAssign": false
-  }],
-  "no-tabs": ["error", { allowIndentationTabs: true }]
-}
+  rules: {
+    'prefer-const': [
+      'error',
+      {
+        destructuring: 'any',
+        ignoreReadBeforeAssign: false,
+      },
+    ],
+    'no-tabs': ['error', {allowIndentationTabs: true}],
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/explicit-function-return-type': [
+      'warn',
+      {
+        // if true, only functions which are part of a declaration will be checked
+        allowExpressions: true,
+        allowHigherOrderFunctions: true,
+      },
+    ],
+  },
 };
