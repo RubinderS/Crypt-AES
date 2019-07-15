@@ -1,9 +1,8 @@
 // import {aes} from 'utils';
 import {processMainOptions} from './ProcessMainOptions';
+import {processCommands} from './commands';
 import {CLIArgsType} from './types';
 import {isOption} from './CliUtils';
-
-// const {encrypt, decrypt} = aes();
 
 function getOptionsFromCLI(): CLIArgsType[] {
   const cliArgs: CLIArgsType[] = [];
@@ -22,23 +21,12 @@ function getOptionsFromCLI(): CLIArgsType[] {
   }
 
   return cliArgs;
-
-  // const cliOptions: ICLIOptionsType = {
-  //   srcPath: '.',
-  //   destPath: '.',
-  //   pswrd: 'mypass',
-  //   delSrc: false,
-  //   needExt: true,
-  // };
-  // return cliOptions;
 }
 
 function main(): void {
   const cliArgs = getOptionsFromCLI();
   if (cliArgs.length !== 0) {
-    isOption(cliArgs[0].option)
-      ? processMainOptions(cliArgs)
-      : processCommands(cliArgs);
+    isOption(cliArgs[0].option) ? processMainOptions(cliArgs) : processCommands(cliArgs);
   }
 }
 

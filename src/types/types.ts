@@ -1,6 +1,6 @@
 interface CryptConfigType {
   srcPath: string;
-  destPath: string;
+  destPath: string | undefined;
   pswrd: string;
   delSrc: boolean;
   noExt: boolean;
