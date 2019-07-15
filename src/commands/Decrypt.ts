@@ -24,7 +24,7 @@ function decryptCmd(cliArgs: CLIArgsType[]): void {
       }
 
       mkdirIfNotExist(path.dirname(destFilePath));
-      
+
       decrypt(filePath, destFilePath, cryptConfig.pswrd, (decryptedFilePath: string) => {
         console.log(`File ${index} - ${decryptedFilePath} decrypted successfuly`);
         if (cryptConfig.delSrc) {
