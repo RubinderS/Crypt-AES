@@ -1,4 +1,4 @@
-interface ICLIOptionsType {
+interface CryptConfigType {
   srcPath: string;
   destPath: string;
   pswrd: string;
@@ -6,13 +6,18 @@ interface ICLIOptionsType {
   needExt: boolean;
 }
 
-interface ICLIArgsType {
+interface CLIArgsType {
   option: string;
   val: string;
 }
 
-interface IMainOptionsType {
-  [key: string]: (val?:string) => void;
+interface MainOptionsType {
+  [key: string]: (val?: string) => void;
 }
 
-export {ICLIOptionsType, ICLIArgsType, IOptionsType};
+// not used anymore
+interface MainCommandsType {
+  encrypt: (src: string, dest: string) => void;
+}
+
+export {CryptConfigType, CLIArgsType, MainOptionsType, MainCommandsType};

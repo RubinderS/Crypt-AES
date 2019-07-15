@@ -1,15 +1,15 @@
 // import {aes} from 'utils';
 import {processMainOptions} from './MainOptions';
-import {ICLIArgsType} from './types';
+import {CLIArgsType} from './types';
 import {isOption} from './commands/Utils';
 
 // const {encrypt, decrypt} = aes();
 
-function getOptionsFromCLI(): ICLIArgsType[] {
-  const cliArgs: ICLIArgsType[] = [];
+function getOptionsFromCLI(): CLIArgsType[] {
+  const cliArgs: CLIArgsType[] = [];
 
   for (let i = 2; i < process.argv.length; i++) {
-    const cliArg: ICLIArgsType = {
+    const cliArg: CLIArgsType = {
       option: '',
       val: '',
     };
@@ -31,10 +31,6 @@ function getOptionsFromCLI(): ICLIArgsType[] {
   //   needExt: true,
   // };
   // return cliOptions;
-}
-
-function processCommands(cliArgs: ICLIArgsType[]): void {
-  console.log(cliArgs);
 }
 
 function main(): void {
