@@ -13,16 +13,16 @@
  *
  */
 
-import aes from '../../crypto/AES';
-const encrypt = aes().encrypt;
+// import aes from '../../crypto/AES';
+// const encrypt = aes().encrypt;
 
-interface ICLIOptionsType {
-  src: string;
-  dest: string;
-  pswrd: string;
-  delSrc: boolean;
-  needExt: boolean;
-}
+// interface ICLIOptionsType {
+//   src: string;
+//   dest: string;
+//   pswrd: string;
+//   delSrc: boolean;
+//   needExt: boolean;
+// }
 
 /**
  * Encrypts the contents of a folder and saves the encrypted files to another location
@@ -66,22 +66,23 @@ interface ICLIOptionsType {
 //   });
 // }
 
-function getOptionsFromCLI() {
+function getOptionsFromCLI(): void {
   return {
     src: '.',
     dest: '.',
-    pswrd:'mypass',
+    pswrd: 'mypass',
     delSrc: false,
     needExt: true,
   };
-}F
-
-function main() {
-  const options = getOptionsFromCLI();
-  Object.freeze(options);
-  encrypt(options);
-  
-
 }
 
+// function main() {
+//   const options = getOptionsFromCLI();
+//   Object.freeze(options);
+//   encrypt(options);
+
+// }
+
 // module.exports = safe;
+
+export {getOptionsFromCLI};
