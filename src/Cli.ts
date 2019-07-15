@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-// import {aes} from 'utils';
 import {processMainOptions} from './ProcessMainOptions';
 import {processCommands} from './commands';
 import {CLIArgsType} from './types';
