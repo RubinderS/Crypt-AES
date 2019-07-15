@@ -1,7 +1,7 @@
 // import {aes} from 'utils';
-import {processMainOptions} from './MainOptions';
+import {processMainOptions} from './ProcessMainOptions';
 import {CLIArgsType} from './types';
-import {isOption} from './commands/Utils';
+import {isOption} from './CliUtils';
 
 // const {encrypt, decrypt} = aes();
 

@@ -3,7 +3,7 @@ interface CryptConfigType {
   destPath: string;
   pswrd: string;
   delSrc: boolean;
-  needExt: boolean;
+  noExt: boolean;
 }
 
 interface CLIArgsType {
