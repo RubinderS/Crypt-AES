@@ -6,7 +6,7 @@ import {getCryptConfig, getFilesList, extension} from './CommandUtils';
 function encryptCmd(cliArgs: CLIArgsType[]): void {
   const {encrypt} = aes();
   const cryptConfig = getCryptConfig(cliArgs);
-  cryptConfig.srcPath = path.normalize(cryptConfig.srcPath + path.sep);
+  cryptConfig.srcPath = path.normalize(cryptConfig.srcPath + path.sep).replace(/\\*$/g, '');
   const filesList = getFilesList(cryptConfig.srcPath);
   const filesEncryptedList: string[] = [];
 
@@ -14,7 +14,7 @@ function encryptCmd(cliArgs: CLIArgsType[]): void {
     let destFilePath = '';
 
     if (cryptConfig.destPath) {
-      cryptConfig.destPath = path.normalize(cryptConfig.destPath + path.sep);
+      cryptConfig.destPath = path.normalize(cryptConfig.destPath + path.sep).replace(/\\*$/g, '');
       destFilePath =
         path.join(cryptConfig.destPath, filePath.replace(cryptConfig.srcPath, '')) + extension;
     } else {

@@ -6,7 +6,7 @@ import {getCryptConfig, getFilesList, extension} from './CommandUtils';
 function decryptCmd(cliArgs: CLIArgsType[]): void {
   const {decrypt} = aes();
   const cryptConfig = getCryptConfig(cliArgs);
-  cryptConfig.srcPath = path.normalize(cryptConfig.srcPath + path.sep);
+  cryptConfig.srcPath = path.normalize(cryptConfig.srcPath + path.sep).replace(/\\*$/g, '');
   const filesList = getFilesList(cryptConfig.srcPath);
 
   filesList.forEach((filePath, index) => {
@@ -15,7 +15,7 @@ function decryptCmd(cliArgs: CLIArgsType[]): void {
       let destFilePath = '';
 
       if (cryptConfig.destPath) {
-        cryptConfig.destPath = path.normalize(cryptConfig.destPath + path.sep);
+        cryptConfig.destPath = path.normalize(cryptConfig.destPath + path.sep).replace(/\\*$/g, '');
         destFilePath = path
           .join(cryptConfig.destPath, filePath.replace(cryptConfig.srcPath, ''))
           .replace(extRegex, '');
