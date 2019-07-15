@@ -16,8 +16,7 @@ function encryptCmd(cliArgs: CLIArgsType[]): void {
     if (cryptConfig.destPath) {
       cryptConfig.destPath = path.normalize(cryptConfig.destPath + path.sep);
       destFilePath =
-        path.join(cryptConfig.destPath, filePath.replace(cryptConfig.srcPath, '')) +
-        extension;
+        path.join(cryptConfig.destPath, filePath.replace(cryptConfig.srcPath, '')) + extension;
     } else {
       destFilePath = filePath + extension;
     }
@@ -38,4 +37,4 @@ function encryptCmd(cliArgs: CLIArgsType[]): void {
   });
 }
 
-export {encryptCmd as encrypt};
+export {encryptCmd};

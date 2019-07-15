@@ -22,7 +22,7 @@ function getCryptConfig(cliArgs: CLIArgsType[]): CryptConfigType {
     noExt: false,
   };
 
-  for (let i = 0; i < cliArgs.length; i++) {
+  for (let i = 1; i < cliArgs.length; i++) {
     switch (cliArgs[i].option) {
       case '-s':
       case '--source':

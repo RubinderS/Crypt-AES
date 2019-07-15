@@ -1,5 +1,6 @@
 import {CLIArgsType} from '../types';
 import {encrypt} from './Encrypt';
+import {decryptCmd} from './Decrypt';
 
 function processCommands(cliArgs: CLIArgsType[]): void {
   switch (cliArgs[0].option) {
@@ -9,6 +10,7 @@ function processCommands(cliArgs: CLIArgsType[]): void {
       break;
     case 'dec':
     case 'decrypt':
+      decryptCmd(cliArgs);
       break;
   }
 }
