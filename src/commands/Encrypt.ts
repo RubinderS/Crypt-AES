@@ -24,7 +24,7 @@ function encryptCmd(cliArgs: CLIArgsType[]): void {
     mkdirIfNotExist(path.dirname(destFilePath));
 
     encrypt(filePath, destFilePath, cryptConfig.pswrd, (encryptedFilePath: string) => {
-      console.log(`File ${index} - ${encryptedFilePath} ecrypted successfuly`);
+      console.log(`File ${index+1} - ${encryptedFilePath} ecrypted successfuly`);
       filesEncryptedList.push(filePath);
       if (cryptConfig.delSrc && filesEncryptedList.length === filesList.length) {
         try {
