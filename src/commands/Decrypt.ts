@@ -1,7 +1,7 @@
 import * as path from 'path';
 import {aes, mkdirIfNotExist, deleteDirWithFiles} from 'utils';
 import {CLIArgsType} from '../types';
-import {getCryptConfig, getFilesList, extension} from './CommandUtils';
+import {getCryptConfig, getFilesList, extension, isDir} from './CommandUtils';
 
 function decryptCmd(cliArgs: CLIArgsType[]): void {
   const {decrypt} = aes();
@@ -16,9 +16,16 @@ function decryptCmd(cliArgs: CLIArgsType[]): void {
 
       if (cryptConfig.destPath) {
         cryptConfig.destPath = path.normalize(cryptConfig.destPath + path.sep).replace(/\\*$/g, '');
-        destFilePath = path
-          .join(cryptConfig.destPath, filePath.replace(cryptConfig.srcPath, ''))
-          .replace(extRegex, '');
+        if (isDir(cryptConfig.srcPath)) {
+          destFilePath = path
+            .join(cryptConfig.destPath, filePath.replace(cryptConfig.srcPath, ''))
+            .replace(extRegex, '');
+        } else {
+          destFilePath = path.join(
+            cryptConfig.destPath,
+            path.basename(filePath).replace(extRegex, ''),
+          );
+        }
       } else {
         destFilePath = filePath.replace(extRegex, '');
       }
@@ -26,7 +33,7 @@ function decryptCmd(cliArgs: CLIArgsType[]): void {
       mkdirIfNotExist(path.dirname(destFilePath));
 
       decrypt(filePath, destFilePath, cryptConfig.pswrd, (decryptedFilePath: string) => {
-        console.log(`File ${index+1} - ${decryptedFilePath} decrypted successfuly`);
+        console.log(`File ${index + 1} - ${decryptedFilePath} decrypted successfuly`);
         if (cryptConfig.delSrc) {
           try {
             deleteDirWithFiles(decryptedFilePath);

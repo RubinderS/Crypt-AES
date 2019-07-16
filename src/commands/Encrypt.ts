@@ -1,7 +1,7 @@
 import * as path from 'path';
 import {aes, mkdirIfNotExist, deleteDirWithFiles} from 'utils';
 import {CLIArgsType} from '../types';
-import {getCryptConfig, getFilesList, extension} from './CommandUtils';
+import {getCryptConfig, getFilesList, extension, isDir} from './CommandUtils';
 
 function encryptCmd(cliArgs: CLIArgsType[]): void {
   const {encrypt} = aes();
@@ -15,8 +15,12 @@ function encryptCmd(cliArgs: CLIArgsType[]): void {
 
     if (cryptConfig.destPath) {
       cryptConfig.destPath = path.normalize(cryptConfig.destPath + path.sep).replace(/\\*$/g, '');
-      destFilePath =
-        path.join(cryptConfig.destPath, filePath.replace(cryptConfig.srcPath, '')) + extension;
+      if (isDir(cryptConfig.srcPath)) {
+        destFilePath =
+          path.join(cryptConfig.destPath, filePath.replace(cryptConfig.srcPath, '')) + extension;
+      } else {
+        destFilePath = path.join(cryptConfig.destPath, path.basename(filePath)) + extension;
+      }
     } else {
       destFilePath = filePath + extension;
     }
@@ -24,7 +28,7 @@ function encryptCmd(cliArgs: CLIArgsType[]): void {
     mkdirIfNotExist(path.dirname(destFilePath));
 
     encrypt(filePath, destFilePath, cryptConfig.pswrd, (encryptedFilePath: string) => {
-      console.log(`File ${index+1} - ${encryptedFilePath} ecrypted successfuly`);
+      console.log(`File ${index + 1} - ${encryptedFilePath} ecrypted successfuly`);
       filesEncryptedList.push(filePath);
       if (cryptConfig.delSrc && filesEncryptedList.length === filesList.length) {
         try {
