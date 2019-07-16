@@ -1,5 +1,6 @@
 import * as path from 'path';
-import {aes, mkdirIfNotExist, deleteDirWithFiles} from 'utils';
+import * as fs from 'fs';
+import {aes, mkdirIfNotExist} from 'utils';
 import {CLIArgsType} from '../types';
 import {getCryptConfig, getFilesList, extension, isDir} from './CommandUtils';
 
@@ -8,7 +9,7 @@ function encryptCmd(cliArgs: CLIArgsType[]): void {
   const cryptConfig = getCryptConfig(cliArgs);
   cryptConfig.srcPath = path.normalize(cryptConfig.srcPath + path.sep).replace(/\\*$/g, '');
   const filesList = getFilesList(cryptConfig.srcPath);
-  const filesEncryptedList: string[] = [];
+  console.log(`Total files to be encrypted: ${filesList.length}\n`);
 
   filesList.forEach((filePath, index) => {
     let destFilePath = '';
@@ -28,14 +29,15 @@ function encryptCmd(cliArgs: CLIArgsType[]): void {
     mkdirIfNotExist(path.dirname(destFilePath));
 
     encrypt(filePath, destFilePath, cryptConfig.pswrd, (encryptedFilePath: string) => {
-      console.log(`File ${index + 1} - ${encryptedFilePath} ecrypted successfuly`);
-      filesEncryptedList.push(filePath);
-      if (cryptConfig.delSrc && filesEncryptedList.length === filesList.length) {
-        try {
-          deleteDirWithFiles(cryptConfig.srcPath);
-        } catch (e) {
-          console.log(`Couldn't delete ${cryptConfig.srcPath}`);
-        }
+      console.log(`file ${index + 1} - ${path.basename(encryptedFilePath)} ecrypted`);
+      if (cryptConfig.delSrc) {
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            console.log(`couldn't delete ${path.basename(filePath)}`);
+            return;
+          }
+          console.log(`file ${path.basename(filePath)} deleted`);
+        });
       }
     });
   });

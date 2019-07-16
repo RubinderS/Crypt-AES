@@ -1,6 +1,7 @@
 import {CLIArgsType, CryptConfigType} from '../types';
 import {fileScanner} from 'utils';
 import * as fs from 'fs';
+import * as path from 'path';
 
 const extension = '.enc';
 
@@ -12,7 +13,7 @@ function getFilesList(dir: string): string[] {
   const dirList: string[] = [];
   fileScanner(dir, true, (filePath: string, isDir: boolean) => {
     if (!isDir) {
-      dirList.push(filePath);
+      dirList.push(path.resolve(filePath));
     }
   });
   return dirList;
@@ -31,15 +32,15 @@ function getCryptConfig(cliArgs: CLIArgsType[]): CryptConfigType {
     switch (cliArgs[i].option) {
       case '-s':
       case '--source':
-        cryptConfig.srcPath = cliArgs[i].val;
+        cryptConfig.srcPath = path.resolve(cliArgs[i].val);
         break;
       case '-p':
       case '--password':
         cryptConfig.pswrd = cliArgs[i].val;
         break;
-      case '-out':
+      case '-o':
       case '--output':
-        cryptConfig.destPath = cliArgs[i].val;
+        cryptConfig.destPath = path.resolve(cliArgs[i].val);
         break;
       case '-d':
       case '--delfiles':
