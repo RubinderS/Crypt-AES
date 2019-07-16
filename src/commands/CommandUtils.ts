@@ -1,7 +1,12 @@
 import {CLIArgsType, CryptConfigType} from '../types';
 import {fileScanner} from 'utils';
+import * as fs from 'fs';
 
 const extension = '.enc';
+
+function isDir(path: string): boolean {
+  return fs.statSync(path).isDirectory();
+}
 
 function getFilesList(dir: string): string[] {
   const dirList: string[] = [];
@@ -51,4 +56,4 @@ function getCryptConfig(cliArgs: CLIArgsType[]): CryptConfigType {
   return cryptConfig;
 }
 
-export {getCryptConfig, getFilesList, extension};
+export {getCryptConfig, getFilesList, extension, isDir};
