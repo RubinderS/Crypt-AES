@@ -14,7 +14,9 @@ function encryptCmd(cliArgs: CLIArgsType[]): void {
   }
 
   cryptConfig.srcPath = path.normalize(cryptConfig.srcPath + path.sep).replace(/\\*$/g, '');
-  const filesList = getFilesList(cryptConfig.srcPath);
+  const filesList = getFilesList(cryptConfig.srcPath).filter((filePath) => {
+    return path.extname(filePath) !== extension;
+  });
   console.log(`Total files to be encrypted: ${filesList.length}\n`);
 
   filesList.forEach((filePath, index) => {
