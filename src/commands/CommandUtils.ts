@@ -3,7 +3,7 @@ import {fileScanner} from 'utils';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const extension = '.enc';
+const extension = '.ncenc';
 
 function isDir(path: string): boolean {
   return fs.statSync(path).isDirectory();
