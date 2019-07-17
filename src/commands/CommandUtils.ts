@@ -43,7 +43,7 @@ function getCryptConfig(cliArgs: CLIArgsType[]): CryptConfigType {
         cryptConfig.destPath = path.resolve(cliArgs[i].val);
         break;
       case '-d':
-      case '--delfiles':
+      case '--delete':
         cryptConfig.delSrc = true;
         break;
       case '-ne':
