@@ -7,6 +7,12 @@ import {getCryptConfig, getFilesList, extension, isDir} from './CommandUtils';
 function decryptCmd(cliArgs: CLIArgsType[]): void {
   const {decrypt} = aes();
   const cryptConfig = getCryptConfig(cliArgs);
+  if (cryptConfig.srcPath === '' || cryptConfig.destPath === '') {
+    console.log('Need to pass source path and password');
+    console.log('See help');
+    return;
+  }
+
   cryptConfig.srcPath = path.normalize(cryptConfig.srcPath + path.sep).replace(/\\*$/g, '');
   const filesList = getFilesList(cryptConfig.srcPath).filter((filePath) => {
     return path.extname(filePath) === extension;

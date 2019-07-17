@@ -7,6 +7,12 @@ import {getCryptConfig, getFilesList, extension, isDir} from './CommandUtils';
 function encryptCmd(cliArgs: CLIArgsType[]): void {
   const {encrypt} = aes();
   const cryptConfig = getCryptConfig(cliArgs);
+  if (cryptConfig.srcPath === '' || cryptConfig.destPath === '') {
+    console.log('Need to pass source path and password');
+    console.log('See help');
+    return;
+  }
+
   cryptConfig.srcPath = path.normalize(cryptConfig.srcPath + path.sep).replace(/\\*$/g, '');
   const filesList = getFilesList(cryptConfig.srcPath);
   console.log(`Total files to be encrypted: ${filesList.length}\n`);
