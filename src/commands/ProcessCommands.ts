@@ -12,6 +12,8 @@ function processCommands(cliArgs: CLIArgsType[]): void {
     case 'decrypt':
       decryptCmd(cliArgs);
       break;
+    default:
+      throw 'Command Not Supported';
   }
 }
 
