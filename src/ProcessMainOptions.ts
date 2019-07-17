@@ -21,7 +21,7 @@ function processMainOptions(cliArgs: CLIArgsType[]): void {
         help();
         break;
       default:
-        throw 'Command Not Supported';
+        console.log('Command Not Supported');
     }
   });
 }

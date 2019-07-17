@@ -13,7 +13,7 @@ function processCommands(cliArgs: CLIArgsType[]): void {
       decryptCmd(cliArgs);
       break;
     default:
-      throw 'Command Not Supported';
+      console.log('Command Not Supported');
   }
 }
 

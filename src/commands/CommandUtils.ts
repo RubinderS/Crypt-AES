@@ -51,7 +51,7 @@ function getCryptConfig(cliArgs: CLIArgsType[]): CryptConfigType {
         cryptConfig.noExt = true;
         break;
       default:
-        throw 'Command Not Supported';
+        console.log('Command Not Supported');
     }
   }
   return cryptConfig;
