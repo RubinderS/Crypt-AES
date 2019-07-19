@@ -46,7 +46,7 @@ function getCryptConfig(cliArgs: CLIArgsType[]): CryptConfigType {
         cryptConfig.delSrc = true;
         break;
       default:
-        console.log('Command Not Supported');
+        process.stdout.write('Command Not Supported');
     }
   }
   return cryptConfig;

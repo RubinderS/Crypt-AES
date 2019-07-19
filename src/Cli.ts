@@ -28,9 +28,9 @@ function main(): void {
   if (cliArgs.length !== 0) {
     isOption(cliArgs[0].option) ? processMainOptions(cliArgs) : processCommands(cliArgs);
   } else {
-    console.log('Node-Crypter');
-    console.log('for help type:-');
-    console.log('nc -h');
+    process.stdout.write('Node-Crypter');
+    process.stdout.write('for help type:-');
+    process.stdout.write('nc -h');
   }
 }
 
