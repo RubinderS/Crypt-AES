@@ -28,4 +28,12 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    {
+      files: ['__tests__/**/*.js'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
+      },
+    },
+  ],
 };
