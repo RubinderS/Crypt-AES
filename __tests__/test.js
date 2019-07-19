@@ -1,6 +1,6 @@
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
-const {version, help} = require('../src/ProcessMainOptions');
+const {version, help} = require('../build/ProcessMainOptions');
 
 describe('Test 1', () => {
   test('Test 1', async () => {
