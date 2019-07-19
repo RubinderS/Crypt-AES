@@ -8,6 +8,10 @@ function help(): string {
   return 'help';
 }
 
+function noArgs(): string {
+  return help();
+}
+
 function processMainOptions(cliArgs: CLIArgsType[]): void {
   cliArgs.forEach((cliArg) => {
     switch (cliArg.option) {
@@ -25,4 +29,8 @@ function processMainOptions(cliArgs: CLIArgsType[]): void {
   });
 }
 
-export {processMainOptions, version, help};
+function processNoArgs(): void {
+  process.stdout.write(noArgs());
+}
+
+export {processMainOptions, processNoArgs, version, help, noArgs};

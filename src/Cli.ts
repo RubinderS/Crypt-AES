@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import {processMainOptions} from './ProcessMainOptions';
+import {processMainOptions, processNoArgs} from './ProcessMainOptions';
 import {processCommands} from './commands';
 import {CLIArgsType} from './types';
 import {isOption} from './CliUtils';
@@ -28,9 +28,7 @@ function main(): void {
   if (cliArgs.length !== 0) {
     isOption(cliArgs[0].option) ? processMainOptions(cliArgs) : processCommands(cliArgs);
   } else {
-    process.stdout.write('Node-Crypter');
-    process.stdout.write('for help type:-');
-    process.stdout.write('nc -h');
+    processNoArgs();
   }
 }
 
