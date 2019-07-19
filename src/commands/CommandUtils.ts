@@ -24,7 +24,7 @@ function getCryptConfig(cliArgs: CLIArgsType[]): CryptConfigType {
     srcPath: '',
     pswrd: '',
     destPath: undefined,
-    delSrc: false,
+    delSrc: true,
   };
 
   for (let i = 1; i < cliArgs.length; i++) {
@@ -41,9 +41,9 @@ function getCryptConfig(cliArgs: CLIArgsType[]): CryptConfigType {
       case '--output':
         cryptConfig.destPath = path.resolve(cliArgs[i].val);
         break;
-      case '-d':
-      case '--delete':
-        cryptConfig.delSrc = true;
+      case '-k':
+      case '--keep':
+        cryptConfig.delSrc = false;
         break;
       default:
         process.stdout.write('Command Not Supported');
