@@ -1,5 +1,4 @@
 import {CLIArgsType} from './types';
-// import {isOption} from './commands/Utils';
 
 function version(): string {
   return 'version';
@@ -9,21 +8,29 @@ function help(): string {
   return 'help';
 }
 
+function noArgs(): string {
+  return help();
+}
+
 function processMainOptions(cliArgs: CLIArgsType[]): void {
   cliArgs.forEach((cliArg) => {
     switch (cliArg.option) {
       case '-v':
       case '--version':
-        console.log(version());
+        process.stdout.write(version());
         break;
       case '-h':
       case '--help':
-        console.log(help());
+        process.stdout.write(help());
         break;
       default:
-        console.log('Command Not Supported');
+        process.stdout.write('Command Not Supported');
     }
   });
 }
 
-export {processMainOptions, version, help};
+function processNoArgs(): void {
+  process.stdout.write(noArgs());
+}
+
+export {processMainOptions, processNoArgs, version, help, noArgs};

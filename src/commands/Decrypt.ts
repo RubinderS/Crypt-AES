@@ -8,8 +8,8 @@ function decryptCmd(cliArgs: CLIArgsType[]): void {
   const {decrypt} = aes();
   const cryptConfig = getCryptConfig(cliArgs);
   if (cryptConfig.srcPath === '' || cryptConfig.destPath === '') {
-    console.log('Need to pass source path and password');
-    console.log('See help');
+    process.stdout.write('Need to pass source path and password');
+    process.stdout.write('See help');
     return;
   }
 
@@ -17,7 +17,7 @@ function decryptCmd(cliArgs: CLIArgsType[]): void {
   const filesList = getFilesList(cryptConfig.srcPath).filter((filePath) => {
     return path.extname(filePath) === extension;
   });
-  console.log(`Total files to be decrypted: ${filesList.length}\n`);
+  process.stdout.write(`Total files to be decrypted: ${filesList.length}\n`);
 
   filesList.forEach((filePath, index) => {
     const extRegex = new RegExp(`${extension}$`, 'g');
@@ -42,14 +42,14 @@ function decryptCmd(cliArgs: CLIArgsType[]): void {
     mkdirIfNotExist(path.dirname(destFilePath));
 
     decrypt(filePath, destFilePath, cryptConfig.pswrd, (decryptedFilePath: string) => {
-      console.log(`file ${index + 1} - ${path.basename(decryptedFilePath)} decrypted successfuly`);
+      process.stdout.write(`file ${index + 1} - ${path.basename(decryptedFilePath)} decrypted successfuly`);
       if (cryptConfig.delSrc) {
         fs.unlink(filePath, (err) => {
           if (err) {
-            console.log(`couldn't delete ${path.basename(filePath)}`);
+            process.stdout.write(`couldn't delete ${path.basename(filePath)}`);
             return;
           }
-          console.log(`file ${path.basename(filePath)} deleted`);
+          process.stdout.write(`file ${path.basename(filePath)} deleted`);
         });
       }
     });
