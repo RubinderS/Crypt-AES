@@ -1,12 +1,12 @@
 import {CLIArgsType} from './types';
 // import {isOption} from './commands/Utils';
 
-function version(): void {
-  console.log('version');
+function version(): string {
+  return 'version';
 }
 
-function help(): void {
-  console.log('help');
+function help(): string {
+  return 'help';
 }
 
 function processMainOptions(cliArgs: CLIArgsType[]): void {
@@ -14,11 +14,11 @@ function processMainOptions(cliArgs: CLIArgsType[]): void {
     switch (cliArg.option) {
       case '-v':
       case '--version':
-        version();
+        console.log(version());
         break;
       case '-h':
       case '--help':
-        help();
+        console.log(help());
         break;
       default:
         console.log('Command Not Supported');
@@ -26,4 +26,4 @@ function processMainOptions(cliArgs: CLIArgsType[]): void {
   });
 }
 
-export {processMainOptions};
+export {processMainOptions, version, help};
