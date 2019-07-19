@@ -1,6 +1,9 @@
 const util = require('util');
+const {deleteDirWithFiles} = require('utils');
+const fs = require('fs');
 const exec = util.promisify(require('child_process').exec);
 const {version, help, noArgs} = require('../build/ProcessMainOptions');
+const testDir = 'testDir';
 
 async function cmd(command) {
   const {stdout, stderr} = await exec(command);
@@ -8,6 +11,24 @@ async function cmd(command) {
     throw 'Error: ' + stderr;
   }
   return stdout;
+}
+
+function setup() {
+  fs.mkdirSync(`testDir`);
+  fs.mkdirSync(`${testDir}/dir1`);
+  fs.mkdirSync(`${testDir}/dir1/dir1SubDir1`);
+  fs.mkdirSync(`${testDir}/emptyDir`);
+  fs.writeFileSync(
+    `${testDir}/dir1/dir1.txt`,
+    `The quick brown fox jumps over the lazy dog`,
+    `utf-8`,
+  );
+  fs.writeFileSync(
+    `${testDir}/dir1/dir1SubDir1/dir1SubDir1.txt`,
+    `The quick brown fox jumps over the lazy dog`,
+    `utf-8`,
+  );
+  fs.writeFileSync(`${testDir}/root.txt`, `The quick brown fox jumps over the lazy dog`, `utf-8`);
 }
 
 describe('No Args', () => {
@@ -34,4 +55,10 @@ describe('Main Options', () => {
     const output = await cmd('node build/Cli.js --help');
     expect(output).toBe(help());
   });
+});
+
+describe('Encrypt Command', () => {
+  deleteDirWithFiles(testDir);
+  setup();
+  deleteDirWithFiles(testDir);
 });
