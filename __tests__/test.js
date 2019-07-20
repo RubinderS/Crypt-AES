@@ -4,21 +4,21 @@ const fs = require('fs');
 const path = require('path');
 const exec = util.promisify(require('child_process').exec);
 const {version, help, noArgs} = require('../build/ProcessMainOptions');
-const {extension} = require('../build/commands/CommandUtils');
+const {extension: ext} = require('../build/commands/CommandUtils');
 const env = `node`;
 const cliPath = 'build/Cli';
 const pswrd = `"P@$WR|)"`;
 const dirs = {
   rootDir: `testDir`,
-  dir1: `dir1`,
-  subDir1: `dir1SubDir1`,
-  emptyDir: `emptyDir`,
-  fileDir1: `dir1.txt`,
-  fileSubDir1: `dir1SubDir1.txt`,
-  fileRoot: `root.txt`,
-  outPathEnc: `encrypted`,
-  outPathDec: `decrypted`,
-  fileBlank: `blank.txt`,
+  fileBlankRootDir: `testDir/blank.txt`,
+  fileRootDir: `testDir/root.txt`,
+  outPathEncDir: `testDir/encrypted`,
+  outPathDecDir: `testDir/decrypted`,
+  emptyDir: `testDir/emptyDir`,
+  dir1: `testDir/dir1`,
+  fileDir1: `testDir/dir1/dir1.txt`,
+  subDir1: `testDir/dir1/dir1SubDir1`,
+  fileSubDir1: `testDir/dir1/dir1SubDir1/dir1SubDir1.txt`,
 };
 const data = `The quick brown fox jumps over the lazy dog`;
 const encoding = `utf-8`;
@@ -32,101 +32,113 @@ async function cmd(command) {
 }
 
 function setup() {
-  fs.mkdirSync(path.join(dirs.rootDir));
-  fs.mkdirSync(path.join(dirs.rootDir, dirs.dir1));
-  fs.mkdirSync(path.join(dirs.rootDir, dirs.dir1, dirs.subDir1));
-  fs.mkdirSync(path.join(dirs.rootDir, dirs.emptyDir));
-  fs.writeFileSync(path.join(dirs.rootDir, dirs.dir1, dirs.fileDir1), data, encoding);
-  fs.writeFileSync(
-    path.join(dirs.rootDir, dirs.dir1, dirs.subDir1, dirs.fileSubDir1),
-    data,
-    encoding,
-  );
-  fs.writeFileSync(path.join(dirs.rootDir, dirs.fileRoot), data, encoding);
-  fs.writeFileSync(path.join(dirs.rootDir, dirs.fileBlank), '', encoding);
+  fs.mkdirSync(dirs.rootDir);
+  fs.mkdirSync(dirs.dir1);
+  fs.mkdirSync(dirs.subDir1);
+  fs.mkdirSync(dirs.emptyDir);
+  fs.writeFileSync(dirs.fileRootDir, data, encoding);
+  fs.writeFileSync(dirs.fileBlankRootDir, '', encoding);
+  fs.writeFileSync(dirs.fileDir1, data, encoding);
+  fs.writeFileSync(dirs.fileSubDir1, data, encoding);
 }
 
 beforeAll(() => {
   deleteAll(dirs.rootDir);
 });
 
-setup();
-// describe('No Args', () => {
-//   test('No Args', async () => {
-//     const output = await cmd(`${env} ${cliPath}`);
-//     expect(output).toBe(noArgs());
-//   });
-// });
-//
-// describe('Main Options', () => {
-//   test('Version - Short Command', async () => {
-//     const output = await cmd(`${env} ${cliPath} -v`);
-//     expect(output).toBe(version());
-//   });
+describe('No Args', () => {
+  test('No Args', async () => {
+    const output = await cmd(`${env} ${cliPath}`);
+    expect(output).toBe(noArgs());
+  });
+});
 
-//   test('Version - Long Command', async () => {
-//     const output = await cmd(`${env} ${cliPath} --version`);
-//     expect(output).toBe(version());
-//   });
+describe('Main Options', () => {
+  test('Version - Short Command', async () => {
+    const output = await cmd(`${env} ${cliPath} -v`);
+    expect(output).toBe(version());
+  });
 
-//   test('Help - Short Command', async () => {
-//     const output = await cmd(`${env} ${cliPath} -h`);
-//     expect(output).toBe(help());
-//   });
+  test('Version - Long Command', async () => {
+    const output = await cmd(`${env} ${cliPath} --version`);
+    expect(output).toBe(version());
+  });
 
-//   test('Help - Long Command', async () => {
-//     const output = await cmd(`${env} ${cliPath} --help`);
-//     expect(output).toBe(help());
-//   });
-// });
+  test('Help - Short Command', async () => {
+    const output = await cmd(`${env} ${cliPath} -h`);
+    expect(output).toBe(help());
+  });
 
-// describe('Crypt Commands', () => {
-//   beforeEach(() => {
-//     setup();
-//   });
+  test('Help - Long Command', async () => {
+    const output = await cmd(`${env} ${cliPath} --help`);
+    expect(output).toBe(help());
+  });
+});
 
-//   afterEach(() => {
-//     deleteAll(dirs.rootDir);
-//   });
+describe('Crypt Commands', () => {
+  beforeEach(() => {
+    setup();
+  });
 
-//   test('File - no flags - short commands', async () => {
-//     await cmd(`${env} ${cliPath} enc -s ${dirs.fileRoot} -p ${pswrd}`);
-//     expect(fs.existsSync(`${dirs.fileRoot}`)).toBe(false);
-//     expect(fs.existsSync(`${dirs.fileRoot}${extension}`)).toBe(true);
+  afterEach(() => {
+    deleteAll(dirs.rootDir);
+  });
 
-//     await cmd(`${env} ${cliPath} dec -s ${dirs.fileRoot}${extension} -p ${pswrd}`);
-//     expect(fs.existsSync(`${dirs.fileRoot}`)).toBe(true);
-//     expect(fs.existsSync(`${dirs.fileRoot}${extension}`)).toBe(false);
-//     expect(fs.readFileSync(`${dirs.fileRoot}`, encoding)).toBe(data);
-//   });
+  test('File - no flags - short commands', async () => {
+    await cmd(`${env} ${cliPath} enc -s ${dirs.fileRootDir} -p ${pswrd}`);
+    expect(fs.existsSync(dirs.fileRootDir)).toBe(false);
+    expect(fs.existsSync(dirs.fileRootDir + ext)).toBe(true);
 
-//   test('File - keep flag - short commands', async () => {
-//     await cmd(`${env} ${cliPath} enc -s ${dirs.fileRoot} -p ${pswrd} -k`);
-//     expect(fs.existsSync(`${dirs.fileRoot}`)).toBe(true);
-//     expect(fs.existsSync(`${dirs.fileRoot}${extension}`)).toBe(true);
+    await cmd(`${env} ${cliPath} dec -s ${dirs.fileRootDir + ext} -p ${pswrd}`);
+    expect(fs.existsSync(dirs.fileRootDir)).toBe(true);
+    expect(fs.existsSync(dirs.fileRootDir + ext)).toBe(false);
+    expect(fs.readFileSync(dirs.fileRootDir, encoding)).toBe(data);
+  });
 
-//     deleteAll(dirs.fileRoot);
+  test('File - blank file - short commands', async () => {
+    await cmd(`${env} ${cliPath} enc -s ${dirs.fileBlankRootDir} -p ${pswrd}`);
+    expect(fs.existsSync(dirs.fileBlankRootDir)).toBe(false);
+    expect(fs.existsSync(dirs.fileBlankRootDir + ext)).toBe(true);
 
-//     await cmd(`${env} ${cliPath} dec -s ${dirs.fileRoot}${extension} -p ${pswrd} -k`);
-//     expect(fs.existsSync(`${dirs.fileRoot}`)).toBe(true);
-//     expect(fs.existsSync(`${dirs.fileRoot}${extension}`)).toBe(true);
-//     expect(fs.readFileSync(`${dirs.fileRoot}`, encoding)).toBe(data);
-//   });
+    await cmd(`${env} ${cliPath} dec -s ${dirs.fileBlankRootDir + ext} -p ${pswrd}`);
+    expect(fs.existsSync(dirs.fileBlankRootDir)).toBe(true);
+    expect(fs.existsSync(dirs.fileBlankRootDir + ext)).toBe(false);
+    expect(fs.readFileSync(dirs.fileBlankRootDir, encoding)).toBe('');
+  });
 
-//   test('File - out flag - long commands', async () => {
-//     await cmd(
-//       `${env} ${cliPath} encrypt --source ${dirs.fileRoot} --password ${pswrd} --output ${outPathEnc}`,
-//     );
-//     expect(fs.existsSync(`${dirs.fileRoot}`)).toBe(false);
-//     expect(fs.existsSync(`${dirs.fileRoot}${extension}`)).toBe(false);
-//     expect(fs.existsSync(`${outPathEnc}/${path.basename(dirs.fileRoot)}${extension}`)).toBe(true);
+  test('File - keep flag - short commands', async () => {
+    await cmd(`${env} ${cliPath} enc -s ${dirs.fileRootDir} -p ${pswrd} -k`);
+    expect(fs.existsSync(dirs.fileRootDir)).toBe(true);
+    expect(fs.existsSync(dirs.fileRootDir + ext)).toBe(true);
 
-//     await cmd(
-//       `${env} ${cliPath} dec -s ${outPathEnc}/${dirs.fileRoot}${extension} -p ${pswrd} --output ${outPathDec}`,
-//     );
-//     expect(fs.existsSync(`${outPathEnc}/${dirs.fileRoot}`)).toBe(false);
-//     expect(fs.existsSync(`${outPathEnc}/${dirs.fileRoot}${extension}`)).toBe(true);
-//     expect(fs.existsSync(`${outPathDec}/${dirs.fileRoot}`)).toBe(true);
-//     expect(fs.readFileSync(`${outPathDec}/${dirs.fileRoot}`, encoding)).toBe(data);
-//   });
-// });
+    deleteAll(dirs.fileRoot);
+
+    await cmd(`${env} ${cliPath} dec -s ${dirs.fileRootDir + ext} -p ${pswrd} -k`);
+    expect(fs.existsSync(dirs.fileRootDir)).toBe(true);
+    expect(fs.existsSync(dirs.fileRootDir + ext)).toBe(true);
+    expect(fs.readFileSync(dirs.fileRootDir, encoding)).toBe(data);
+  });
+
+  test('File - out flag - long commands', async () => {
+    const encryptedFile = path.join(dirs.outPathEncDir, path.basename(dirs.fileRootDir) + ext);
+    const decryptedFile = path.join(dirs.outPathDecDir, path.basename(dirs.fileRootDir));
+    const encryptCmnd = `${env} ${cliPath} encrypt
+    --source ${dirs.fileRootDir}
+    --password ${pswrd}
+    --output ${dirs.outPathEncDir}`.replace(/(\n|\r)/g, ' ');
+    await cmd(encryptCmnd);
+    expect(fs.existsSync(dirs.fileRootDir)).toBe(false);
+    expect(fs.existsSync(dirs.fileRootDir + ext)).toBe(false);
+    expect(fs.existsSync(encryptedFile)).toBe(true);
+
+    const decryptCmnd = `${env} ${cliPath} decrypt
+    --source ${encryptedFile}
+    --password ${pswrd}
+    --output ${dirs.outPathDecDir}`.replace(/(\n|\r)/g, ' ');
+    await cmd(decryptCmnd);
+    expect(fs.existsSync(encryptedFile.replace(/ext$/, ''))).toBe(false);
+    expect(fs.existsSync(encryptedFile)).toBe(false);
+    expect(fs.existsSync(decryptedFile)).toBe(true);
+    expect(fs.readFileSync(decryptedFile, encoding)).toBe(data);
+  });
+});
