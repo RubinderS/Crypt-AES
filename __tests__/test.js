@@ -16,6 +16,8 @@ const paths = {
   fileSubDir1: `testDir/dir1/dir1SubDir1/dir1SubDir1.txt`,
   fileRoot: `testDir/root.txt`,
 };
+const data = `The quick brown fox jumps over the lazy dog`;
+const encoding = `utf-8`;
 
 async function cmd(command) {
   const {stdout, stderr} = await exec(command);
@@ -30,9 +32,9 @@ function setup() {
   fs.mkdirSync(paths.dir1);
   fs.mkdirSync(paths.subDir1);
   fs.mkdirSync(paths.emptyDir);
-  fs.writeFileSync(paths.fileDir1, `The quick brown fox jumps over the lazy dog`, `utf-8`);
-  fs.writeFileSync(paths.fileSubDir1, `The quick brown fox jumps over the lazy dog`, `utf-8`);
-  fs.writeFileSync(paths.fileRoot, `The quick brown fox jumps over the lazy dog`, `utf-8`);
+  fs.writeFileSync(paths.fileDir1, data, encoding);
+  fs.writeFileSync(paths.fileSubDir1, data, encoding);
+  fs.writeFileSync(paths.fileRoot, data, encoding);
 }
 
 beforeAll(() => {
@@ -68,20 +70,24 @@ describe('Main Options', () => {
   });
 });
 
-describe('Encrypt Command', () => {
-  beforeAll(() => {
-    // deleteDirWithFiles(paths.rootDir);
+describe('Crypt Commands', () => {
+  beforeEach(() => {
+    deleteDirWithFiles(paths.rootDir);
     setup();
   });
 
-  afterAll(() => {
-    // deleteDirWithFiles(paths.rootDir);
+  afterEach(() => {
+    deleteDirWithFiles(paths.rootDir);
   });
 
   test('File - no flags', async () => {
-    const output = await cmd(`${env} ${cliPath} enc -s ${paths.fileRoot} -p ${pswrd}`);
-    console.log(output);
+    await cmd(`${env} ${cliPath} enc -s ${paths.fileRoot} -p ${pswrd}`);
+    expect(fs.existsSync(`${paths.fileRoot}`)).toBe(false);
     expect(fs.existsSync(`${paths.fileRoot}${extension}`)).toBe(true);
-    expect(fs.readFileSync(`${paths.fileRoot}${extension}`)).toMatchSnapshot();
+
+    await cmd(`${env} ${cliPath} dec -s ${paths.fileRoot}${extension} -p ${pswrd}`);
+    expect(fs.existsSync(`${paths.fileRoot}`)).toBe(true);
+    expect(fs.existsSync(`${paths.fileRoot}${extension}`)).toBe(false);
+    expect(fs.readFileSync(`${paths.fileRoot}`, encoding)).toBe(data);
   });
 });
