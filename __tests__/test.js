@@ -16,6 +16,7 @@ const paths = {
   fileSubDir1: `testDir/dir1/dir1SubDir1/dir1SubDir1.txt`,
   fileRoot: `testDir/root.txt`,
 };
+
 async function cmd(command) {
   const {stdout, stderr} = await exec(command);
   if (stderr) {
@@ -33,6 +34,10 @@ function setup() {
   fs.writeFileSync(paths.fileSubDir1, `The quick brown fox jumps over the lazy dog`, `utf-8`);
   fs.writeFileSync(paths.fileRoot, `The quick brown fox jumps over the lazy dog`, `utf-8`);
 }
+
+beforeAll(() => {
+  deleteDirWithFiles(paths.rootDir);
+});
 
 describe('No Args', () => {
   test('No Args', async () => {
