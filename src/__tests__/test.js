@@ -42,7 +42,6 @@ function setup() {
   fs.writeFileSync(dirs.fileSubDir1, data, encoding);
 }
 
-
 describe('Main Options', () => {
   test('Version - Short Command', async () => {
     const output = await cmd(`${env} ${cliPath} -v`);
