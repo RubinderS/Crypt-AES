@@ -3,8 +3,8 @@ const {deleteAll} = require('utils');
 const fs = require('fs');
 const path = require('path');
 const exec = util.promisify(require('child_process').exec);
-const {version, help, noArgs} = require('../build/ProcessMainOptions');
-const {extension: ext} = require('../build/commands/CommandUtils');
+const {version, help, noArgs} = require('../../build/ProcessMainOptions');
+const {extension: ext} = require('../../build/commands/CommandUtils');
 const env = `node`;
 const cliPath = 'build/Cli';
 const pswrd = `"P@$WR|)"`;
@@ -42,12 +42,6 @@ function setup() {
   fs.writeFileSync(dirs.fileSubDir1, data, encoding);
 }
 
-describe('No Args', () => {
-  test('No Args', async () => {
-    const output = await cmd(`${env} ${cliPath}`);
-    expect(output).toBe(noArgs());
-  });
-});
 
 describe('Main Options', () => {
   test('Version - Short Command', async () => {
