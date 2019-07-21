@@ -8,7 +8,7 @@ function help(): string {
   return 'help';
 }
 
-function noArgs(): string {
+function noArguments(): string {
   return help();
 }
 
@@ -30,7 +30,7 @@ function processMainOptions(cliArgs: CLIArgsType[]): void {
 }
 
 function processNoArgs(): void {
-  process.stdout.write(noArgs());
+  process.stdout.write(noArguments());
 }
 
-export {processMainOptions, processNoArgs, version, help, noArgs};
+export {processMainOptions, processNoArgs, version, help, noArguments};
