@@ -1,30 +1,28 @@
 import {env, cliPath, cmd} from './TestCommons';
 import {version, help, noArguments} from '../ProcessMainOptions';
 
-describe('No Arguments', () => {
-  test('No Arguments', () => {
+describe('Root Flags', () => {
+  test('No flags', () => {
     const output = cmd(`${env} ${cliPath}`);
     expect(output).toBe(noArguments());
   });
-});
 
-describe('Main Options', () => {
-  test('Version - Short Command', () => {
+  test('Version - short command', () => {
     const output = cmd(`${env} ${cliPath} -v`);
     expect(output).toBe(version());
   });
 
-  test('Version - Long Command', () => {
+  test('Version - long command', () => {
     const output = cmd(`${env} ${cliPath} --version`);
     expect(output).toBe(version());
   });
 
-  test('Help - Short Command', () => {
+  test('Help - short command', () => {
     const output = cmd(`${env} ${cliPath} -h`);
     expect(output).toBe(help());
   });
 
-  test('Help - Long Command', () => {
+  test('Help - long command', () => {
     const output = cmd(`${env} ${cliPath} --help`);
     expect(output).toBe(help());
   });
