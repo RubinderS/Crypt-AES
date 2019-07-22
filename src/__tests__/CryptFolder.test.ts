@@ -28,14 +28,14 @@ describe('Crypt Commands Folder', () => {
     deleteAll(dirs.rootDir);
   });
 
-  test('No flags - short commands', async () => {
-    await cmd(`${env} ${cliPath} enc -s ${dirs.rootDir} -p ${pswrd}`);
+  test('No flags - short commands', () => {
+    cmd(`${env} ${cliPath} enc -s ${dirs.rootDir} -p ${pswrd}`);
     rootFiles.forEach((file) => {
       expect(fs.existsSync(file)).toBe(false);
       expect(fs.existsSync(file + ext)).toBe(true);
     });
 
-    await cmd(`${env} ${cliPath} dec -s ${dirs.rootDir} -p ${pswrd}`);
+    cmd(`${env} ${cliPath} dec -s ${dirs.rootDir} -p ${pswrd}`);
     rootFiles.forEach((file) => {
       expect(fs.existsSync(file + ext)).toBe(false);
       expect(fs.existsSync(file)).toBe(true);
@@ -43,15 +43,15 @@ describe('Crypt Commands Folder', () => {
     });
   });
 
-  test('Keep flag - long commands', async () => {
-    await cmd(`${env} ${cliPath} encrypt --source ${dirs.rootDir} --password ${pswrd} --keep`);
+  test('Keep flag - long commands', () => {
+    cmd(`${env} ${cliPath} encrypt --source ${dirs.rootDir} --password ${pswrd} --keep`);
     rootFiles.forEach((file) => {
       expect(fs.existsSync(file)).toBe(true);
       expect(fs.existsSync(file + ext)).toBe(true);
       deleteAll(file);
     });
 
-    await cmd(`${env} ${cliPath} decrypt --source ${dirs.rootDir} --password ${pswrd} --keep`);
+    cmd(`${env} ${cliPath} decrypt --source ${dirs.rootDir} --password ${pswrd} --keep`);
     rootFiles.forEach((file) => {
       expect(fs.existsSync(file + ext)).toBe(true);
       expect(fs.existsSync(file)).toBe(true);
@@ -59,10 +59,10 @@ describe('Crypt Commands Folder', () => {
     });
   });
 
-  test('Out flag - short commands', async () => {
+  test('Out flag - short commands', () => {
     const encryptCmnd = `${env} ${cliPath} enc -s ${dirs.fileRootDir} -p ${pswrd} -o ${dirs.encDir}`;
 
-    await cmd(encryptCmnd);
+    cmd(encryptCmnd);
     rootFiles.forEach((file) => {
       expect(fs.existsSync(file)).toBe(false);
       expect(fs.existsSync(file + ext)).toBe(false);
@@ -74,7 +74,7 @@ describe('Crypt Commands Folder', () => {
     });
 
     const decryptCmnd = `${env} ${cliPath} dec -s ${dirs.encDir} -p ${pswrd} -o ${dirs.decDir}`;
-    await cmd(decryptCmnd);
+    cmd(decryptCmnd);
     encFiles.forEach((file) => {
       expect(fs.existsSync(file)).toBe(false);
       expect(fs.existsSync(file + ext)).toBe(false);
@@ -87,13 +87,13 @@ describe('Crypt Commands Folder', () => {
     });
   });
 
-  test('Out and keep flag - mix commands', async () => {
+  test('Out and keep flag - mix commands', () => {
     const encryptCmnd = `${env} ${cliPath} encrypt
     --source ${dirs.fileRootDir}
     -p ${pswrd}
     --output ${dirs.encDir}
     -k`.replace(/(\n|\r)/g, ' ');
-    await cmd(encryptCmnd);
+    cmd(encryptCmnd);
     rootFiles.forEach((file) => {
       expect(fs.existsSync(file)).toBe(true);
       expect(fs.existsSync(file + ext)).toBe(false);
@@ -108,7 +108,7 @@ describe('Crypt Commands Folder', () => {
     --password ${pswrd}
     -o ${dirs.decDir}
     --keep`.replace(/(\n|\r)/g, ' ');
-    await cmd(decryptCmnd);
+    cmd(decryptCmnd);
     encFiles.forEach((file) => {
       expect(fs.existsSync(file)).toBe(false);
       expect(fs.existsSync(file + ext)).toBe(true);
