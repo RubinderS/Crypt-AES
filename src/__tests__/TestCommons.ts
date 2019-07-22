@@ -24,8 +24,10 @@ function checkAll(config: {paths: string[]; exists: boolean; ext: boolean}): boo
 }
 
 const env = `node`;
+const encoding = `utf-8`;
 const cliPath = 'build/Cli';
 const pswrd = `"P@$WR|)"`;
+const data = `The quick brown fox jumps over the lazy dog`;
 
 const dirs = {
   rootDir: `testDir`,
@@ -35,11 +37,25 @@ const dirs = {
   dir1: `testDir/dir1`,
   subDir1: `testDir/dir1/dir1SubDir1`,
 
+  fileRootDir: `testDir/root.txt`,
   fileBlankRootDir: `testDir/blank.txt`,
   fileSubDir1: `testDir/dir1/dir1SubDir1/dir1SubDir1.txt`,
-  fileRootDir: `testDir/root.txt`,
   fileDir1: `testDir/dir1/dir1.txt`,
 };
+
+const rootPaths = [
+  `testDir`,
+  `testDir/encrypted`,
+  `testDir/decrypted`,
+  `testDir/emptyDir`,
+  `testDir/dir1`,
+  `testDir/dir1/dir1SubDir1`,
+
+  `testDir/blank.txt`,
+  `testDir/dir1/dir1SubDir1/dir1SubDir1.txt`,
+  `testDir/root.txt`,
+  `testDir/dir1/dir1.txt`,
+];
 
 const encPaths = [
   `testDir/${dirs.encDir}`,
@@ -69,4 +85,4 @@ const decPaths = [
   `testDir/${dirs.decDir}/dir1/dir1.txt`,
 ];
 
-export {cmd, checkAll, env, cliPath, pswrd, dirs, encPaths, decPaths};
+export {cmd, checkAll, env, encoding, cliPath, pswrd, data, dirs, rootPaths, encPaths, decPaths};

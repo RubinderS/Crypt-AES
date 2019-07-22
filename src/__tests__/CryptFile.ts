@@ -1,5 +1,8 @@
-import {env, cliPath, cmd, pswrd} from './TestCommons';
+import {env, cliPath, cmd, pswrd, encoding, data, dirs} from './TestCommons';
 import {deleteAll} from 'utils';
+import * as fs from 'fs';
+import * as path from 'path';
+import {extension as ext} from '../commands/CommandUtils';
 
 describe('Crypt Commands', () => {
   beforeAll(() => {
@@ -42,7 +45,7 @@ describe('Crypt Commands', () => {
       expect(fs.existsSync(dirs.fileRootDir)).toBe(true);
       expect(fs.existsSync(dirs.fileRootDir + ext)).toBe(true);
 
-      deleteAll(dirs.fileRoot);
+      deleteAll(dirs.fileRootDir);
 
       await cmd(`${env} ${cliPath} dec -s ${dirs.fileRootDir + ext} -p ${pswrd} -k`);
       expect(fs.existsSync(dirs.fileRootDir)).toBe(true);
@@ -51,9 +54,8 @@ describe('Crypt Commands', () => {
     });
 
     test('Out flag - long commands', async () => {
-      const extRegex = new RegExp(`${ext}$`, 'g');
-      const encryptedFile = path.join(dirs.encDir, path.basename(dirs.fileRootDir) + ext);
-      const decryptedFile = path.join(dirs.decDir, path.basename(dirs.fileRootDir));
+      const encryptedFileBase = path.join(dirs.encDir, path.basename(dirs.fileRootDir));
+      const decryptedFileBase = path.join(dirs.decDir, path.basename(dirs.fileRootDir));
       const encryptCmnd = `${env} ${cliPath} encrypt
     --source ${dirs.fileRootDir}
     --password ${pswrd}
@@ -61,23 +63,25 @@ describe('Crypt Commands', () => {
       await cmd(encryptCmnd);
       expect(fs.existsSync(dirs.fileRootDir)).toBe(false);
       expect(fs.existsSync(dirs.fileRootDir + ext)).toBe(false);
-      expect(fs.existsSync(encryptedFile)).toBe(true);
+
+      expect(fs.existsSync(encryptedFileBase)).toBe(false);
+      expect(fs.existsSync(encryptedFileBase + ext)).toBe(true);
 
       const decryptCmnd = `${env} ${cliPath} decrypt
-    --source ${encryptedFile}
+    --source ${encryptedFileBase + ext}
     --password ${pswrd}
     --output ${dirs.decDir}`.replace(/(\n|\r)/g, ' ');
       await cmd(decryptCmnd);
-      expect(fs.existsSync(encryptedFile.replace(extRegex, ''))).toBe(false);
-      expect(fs.existsSync(encryptedFile)).toBe(false);
-      expect(fs.existsSync(decryptedFile)).toBe(true);
-      expect(fs.readFileSync(decryptedFile, encoding)).toBe(data);
+      expect(fs.existsSync(encryptedFileBase)).toBe(false);
+      expect(fs.existsSync(encryptedFileBase + ext)).toBe(false);
+
+      expect(fs.existsSync(decryptedFileBase)).toBe(true);
+      expect(fs.existsSync(decryptedFileBase + ext)).toBe(false);
     });
 
     test('Out and keep flag - mix commands', async () => {
-      const extRegex = new RegExp(`${ext}$`, 'g');
-      const encryptedFile = path.join(dirs.encDir, path.basename(dirs.fileRootDir) + ext);
-      const decryptedFile = path.join(dirs.decDir, path.basename(dirs.fileRootDir));
+      const encryptedFileBase = path.join(dirs.encDir, path.basename(dirs.fileRootDir));
+      const decryptedFileBase = path.join(dirs.decDir, path.basename(dirs.fileRootDir));
       const encryptCmnd = `${env} ${cliPath} encrypt
       --source ${dirs.fileRootDir}
       -p ${pswrd}
@@ -86,18 +90,21 @@ describe('Crypt Commands', () => {
       await cmd(encryptCmnd);
       expect(fs.existsSync(dirs.fileRootDir)).toBe(true);
       expect(fs.existsSync(dirs.fileRootDir + ext)).toBe(false);
-      expect(fs.existsSync(encryptedFile)).toBe(true);
+
+      expect(fs.existsSync(encryptedFileBase)).toBe(false);
+      expect(fs.existsSync(encryptedFileBase + ext)).toBe(true);
 
       const decryptCmnd = `${env} ${cliPath} decrypt
-      -s ${encryptedFile}
+      -s ${encryptedFileBase + ext}
       --password ${pswrd}
       -o ${dirs.decDir}
       --keep`.replace(/(\n|\r)/g, ' ');
       await cmd(decryptCmnd);
-      expect(fs.existsSync(encryptedFile.replace(extRegex, ''))).toBe(false);
-      expect(fs.existsSync(encryptedFile)).toBe(true);
-      expect(fs.existsSync(decryptedFile)).toBe(true);
-      expect(fs.readFileSync(decryptedFile, encoding)).toBe(data);
+      expect(fs.existsSync(encryptedFileBase)).toBe(false);
+      expect(fs.existsSync(encryptedFileBase + ext)).toBe(true);
+
+      expect(fs.existsSync(decryptedFileBase)).toBe(true);
+      expect(fs.existsSync(decryptedFileBase + ext)).toBe(false);
     });
   });
 });
