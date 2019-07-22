@@ -1,5 +1,4 @@
 import {execSync} from 'child_process';
-import {extension} from '../commands/CommandUtils';
 import * as fs from 'fs';
 
 function cmd(command: string): string {
@@ -10,17 +9,6 @@ function cmd(command: string): string {
     console.log('An error had occurred while processing the command');
   }
   return out;
-}
-
-function checkAll(config: {paths: string[]; exists: boolean; ext: boolean}): boolean {
-  let result = true;
-  config.paths.forEach((path) => {
-    path += config.ext ? extension : '';
-    if (config.exists !== fs.existsSync(path)) {
-      result = false;
-    }
-  });
-  return result;
 }
 
 const env = `node`;

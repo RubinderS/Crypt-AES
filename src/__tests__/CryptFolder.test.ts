@@ -10,11 +10,9 @@ import {
   encFiles,
   decFiles,
   rootFiles,
-  checkAll,
 } from './TestCommons';
 import {deleteAll} from 'utils';
 import * as fs from 'fs';
-import * as path from 'path';
 import {extension as ext} from '../commands/CommandUtils';
 
 describe('Crypt Commands Folder', () => {
