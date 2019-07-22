@@ -9,23 +9,23 @@ describe('No Arguments', () => {
 });
 
 describe('Main Options', () => {
-  test('Version - Short Command', async () => {
-    const output = await cmd(`${env} ${cliPath} -v`);
+  test('Version - Short Command', () => {
+    const output = cmd(`${env} ${cliPath} -v`);
     expect(output).toBe(version());
   });
 
-  test('Version - Long Command', async () => {
-    const output = await cmd(`${env} ${cliPath} --version`);
+  test('Version - Long Command', () => {
+    const output = cmd(`${env} ${cliPath} --version`);
     expect(output).toBe(version());
   });
 
-  test('Help - Short Command', async () => {
-    const output = await cmd(`${env} ${cliPath} -h`);
+  test('Help - Short Command', () => {
+    const output = cmd(`${env} ${cliPath} -h`);
     expect(output).toBe(help());
   });
 
-  test('Help - Long Command', async () => {
-    const output = await cmd(`${env} ${cliPath} --help`);
+  test('Help - Long Command', () => {
+    const output = cmd(`${env} ${cliPath} --help`);
     expect(output).toBe(help());
   });
 });
