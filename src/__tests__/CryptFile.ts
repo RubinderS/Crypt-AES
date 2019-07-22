@@ -52,12 +52,12 @@ describe('Crypt Commands', () => {
 
     test('Out flag - long commands', async () => {
       const extRegex = new RegExp(`${ext}$`, 'g');
-      const encryptedFile = path.join(dirs.outPathEncDir, path.basename(dirs.fileRootDir) + ext);
-      const decryptedFile = path.join(dirs.outPathDecDir, path.basename(dirs.fileRootDir));
+      const encryptedFile = path.join(dirs.encDir, path.basename(dirs.fileRootDir) + ext);
+      const decryptedFile = path.join(dirs.decDir, path.basename(dirs.fileRootDir));
       const encryptCmnd = `${env} ${cliPath} encrypt
     --source ${dirs.fileRootDir}
     --password ${pswrd}
-    --output ${dirs.outPathEncDir}`.replace(/(\n|\r)/g, ' ');
+    --output ${dirs.encDir}`.replace(/(\n|\r)/g, ' ');
       await cmd(encryptCmnd);
       expect(fs.existsSync(dirs.fileRootDir)).toBe(false);
       expect(fs.existsSync(dirs.fileRootDir + ext)).toBe(false);
@@ -66,7 +66,7 @@ describe('Crypt Commands', () => {
       const decryptCmnd = `${env} ${cliPath} decrypt
     --source ${encryptedFile}
     --password ${pswrd}
-    --output ${dirs.outPathDecDir}`.replace(/(\n|\r)/g, ' ');
+    --output ${dirs.decDir}`.replace(/(\n|\r)/g, ' ');
       await cmd(decryptCmnd);
       expect(fs.existsSync(encryptedFile.replace(extRegex, ''))).toBe(false);
       expect(fs.existsSync(encryptedFile)).toBe(false);
@@ -76,12 +76,12 @@ describe('Crypt Commands', () => {
 
     test('Out and keep flag - mix commands', async () => {
       const extRegex = new RegExp(`${ext}$`, 'g');
-      const encryptedFile = path.join(dirs.outPathEncDir, path.basename(dirs.fileRootDir) + ext);
-      const decryptedFile = path.join(dirs.outPathDecDir, path.basename(dirs.fileRootDir));
+      const encryptedFile = path.join(dirs.encDir, path.basename(dirs.fileRootDir) + ext);
+      const decryptedFile = path.join(dirs.decDir, path.basename(dirs.fileRootDir));
       const encryptCmnd = `${env} ${cliPath} encrypt
       --source ${dirs.fileRootDir}
       -p ${pswrd}
-      --output ${dirs.outPathEncDir}
+      --output ${dirs.encDir}
       -k`.replace(/(\n|\r)/g, ' ');
       await cmd(encryptCmnd);
       expect(fs.existsSync(dirs.fileRootDir)).toBe(true);
@@ -91,7 +91,7 @@ describe('Crypt Commands', () => {
       const decryptCmnd = `${env} ${cliPath} decrypt
       -s ${encryptedFile}
       --password ${pswrd}
-      -o ${dirs.outPathDecDir}
+      -o ${dirs.decDir}
       --keep`.replace(/(\n|\r)/g, ' ');
       await cmd(decryptCmnd);
       expect(fs.existsSync(encryptedFile.replace(extRegex, ''))).toBe(false);
