@@ -43,46 +43,57 @@ const dirs = {
   fileDir1: `testDir/dir1/dir1.txt`,
 };
 
-const rootPaths = [
-  `testDir`,
-  `testDir/encrypted`,
-  `testDir/decrypted`,
-  `testDir/emptyDir`,
-  `testDir/dir1`,
-  `testDir/dir1/dir1SubDir1`,
+function setupFileTests(): void {
+  fs.mkdirSync(dirs.rootDir);
+  fs.mkdirSync(dirs.dir1);
+  fs.mkdirSync(dirs.subDir1);
+  fs.mkdirSync(dirs.emptyDir);
+  fs.writeFileSync(dirs.fileRootDir, data, encoding);
+  fs.writeFileSync(dirs.fileBlankRootDir, '', encoding);
+  fs.writeFileSync(dirs.fileDir1, data, encoding);
+  fs.writeFileSync(dirs.fileSubDir1, data, encoding);
+}
 
-  `testDir/blank.txt`,
+function setupFolderTests(): void {
+  fs.mkdirSync(dirs.rootDir);
+  fs.mkdirSync(dirs.dir1);
+  fs.mkdirSync(dirs.subDir1);
+  fs.mkdirSync(dirs.emptyDir);
+  fs.writeFileSync(dirs.fileRootDir, data, encoding);
+  fs.writeFileSync(dirs.fileDir1, data, encoding);
+  fs.writeFileSync(dirs.fileSubDir1, data, encoding);
+}
+
+const rootFiles = [
   `testDir/dir1/dir1SubDir1/dir1SubDir1.txt`,
   `testDir/root.txt`,
   `testDir/dir1/dir1.txt`,
 ];
 
-const encPaths = [
-  `testDir/${dirs.encDir}`,
-  `testDir/${dirs.encDir}/encrypted`,
-  `testDir/${dirs.encDir}/decrypted`,
-  `testDir/${dirs.encDir}/emptyDir`,
-  `testDir/${dirs.encDir}/dir1`,
-  `testDir/${dirs.encDir}/dir1/dir1SubDir1`,
-
-  `testDir/${dirs.encDir}/blank.txt`,
+const encFiles = [
   `testDir/${dirs.encDir}/dir1/dir1SubDir1/dir1SubDir1.txt`,
   `testDir/${dirs.encDir}/root.txt`,
   `testDir/${dirs.encDir}/dir1/dir1.txt`,
 ];
 
-const decPaths = [
-  `testDir/${dirs.decDir}`,
-  `testDir/${dirs.decDir}/encrypted`,
-  `testDir/${dirs.decDir}/decrypted`,
-  `testDir/${dirs.decDir}/emptyDir`,
-  `testDir/${dirs.decDir}/dir1`,
-  `testDir/${dirs.decDir}/dir1/dir1SubDir1`,
-
-  `testDir/${dirs.decDir}/blank.txt`,
+const decFiles = [
   `testDir/${dirs.decDir}/dir1/dir1SubDir1/dir1SubDir1.txt`,
   `testDir/${dirs.decDir}/root.txt`,
   `testDir/${dirs.decDir}/dir1/dir1.txt`,
 ];
 
-export {cmd, checkAll, env, encoding, cliPath, pswrd, data, dirs, rootPaths, encPaths, decPaths};
+export {
+  cmd,
+  checkAll,
+  env,
+  encoding,
+  cliPath,
+  pswrd,
+  data,
+  dirs,
+  setupFileTests,
+  setupFolderTests,
+  rootFiles,
+  encFiles,
+  decFiles,
+};
