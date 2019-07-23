@@ -4,7 +4,7 @@ const packageJSON = JSON.parse(fs.readFileSync(`${__dirname}/../../package.json`
 const versionNumber = packageJSON.version;
 
 function getVersion(): string {
-  return `Version - ${versionNumber}`;
+  return `Version: ${versionNumber}`;
 }
 
 export {getVersion};
