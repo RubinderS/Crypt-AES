@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import {aes, mkdirIfNotExist} from 'utils';
 import {CLIArgsType} from '../types';
-import {getCryptConfig, getFilesList, extension, isDir} from './CommandUtils';
+import {getCryptConfig, getFilesList, extension, isDir} from './Commons';
 
 function encryptCmd(cliArgs: CLIArgsType[]): void {
   const {encrypt} = aes();
@@ -13,7 +13,6 @@ function encryptCmd(cliArgs: CLIArgsType[]): void {
     return;
   }
 
-  cryptConfig.srcPath = path.normalize(cryptConfig.srcPath + path.sep).replace(/\\*$/g, '');
   const filesList = getFilesList(cryptConfig.srcPath).filter((filePath) => {
     return path.extname(filePath) !== extension;
   });
@@ -21,9 +20,7 @@ function encryptCmd(cliArgs: CLIArgsType[]): void {
 
   filesList.forEach((filePath, index) => {
     let destFilePath = '';
-
     if (cryptConfig.destPath) {
-      cryptConfig.destPath = path.normalize(cryptConfig.destPath + path.sep).replace(/\\*$/g, '');
       if (isDir(cryptConfig.srcPath)) {
         destFilePath =
           path.join(cryptConfig.destPath, filePath.replace(cryptConfig.srcPath, '')) + extension;

@@ -10,13 +10,4 @@ interface CLIArgsType {
   val: string;
 }
 
-interface MainOptionsType {
-  [key: string]: (val?: string) => void;
-}
-
-// not used anymore
-interface MainCommandsType {
-  encrypt: (src: string, dest: string) => void;
-}
-
-export {CryptConfigType, CLIArgsType, MainOptionsType, MainCommandsType};
+export {CryptConfigType, CLIArgsType};

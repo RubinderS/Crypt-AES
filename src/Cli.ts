@@ -1,20 +1,35 @@
 #!/usr/bin/env node
-import {processMainOptions, processNoArgs} from './ProcessMainOptions';
+
+/**
+ * ███╗   ██╗ ██████╗ ██████╗ ███████╗     ██████╗██████╗ ██╗   ██╗██████╗ ████████╗
+ * ████╗  ██║██╔═══██╗██╔══██╗██╔════╝    ██╔════╝██╔══██╗╚██╗ ██╔╝██╔══██╗╚══██╔══╝
+ * ██╔██╗ ██║██║   ██║██║  ██║█████╗█████╗██║     ██████╔╝ ╚████╔╝ ██████╔╝   ██║
+ * ██║╚██╗██║██║   ██║██║  ██║██╔══╝╚════╝██║     ██╔══██╗  ╚██╔╝  ██╔═══╝    ██║
+ * ██║ ╚████║╚██████╔╝██████╔╝███████╗    ╚██████╗██║  ██║   ██║   ██║        ██║
+ * ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝     ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝        ╚═╝
+ *
+ *
+ */
+
+import {processRootFlags, getHelp} from './root-flags';
 import {processCommands} from './commands';
 import {CLIArgsType} from './types';
-import {isOption} from './CliUtils';
 
-function getOptionsFromCLI(): CLIArgsType[] {
+function isOption(option: string): boolean {
+  return option.charAt(0) === '-';
+}
+
+function getCLIArgs(args: string[]): CLIArgsType[] {
   const cliArgs: CLIArgsType[] = [];
 
-  for (let i = 2; i < process.argv.length; i++) {
+  for (let i = 2; i < args.length; i++) {
     const cliArg: CLIArgsType = {
       option: '',
       val: '',
     };
-    cliArg.option = process.argv[i];
-    if (process.argv[i + 1] && !isOption(process.argv[i + 1])) {
-      cliArg.val = process.argv[i + 1];
+    cliArg.option = args[i];
+    if (args[i + 1] && !isOption(args[i + 1])) {
+      cliArg.val = args[i + 1];
       i++;
     }
     cliArgs.push(cliArg);
@@ -24,11 +39,11 @@ function getOptionsFromCLI(): CLIArgsType[] {
 }
 
 function main(): void {
-  const cliArgs = getOptionsFromCLI();
+  const cliArgs = getCLIArgs(process.argv);
   if (cliArgs.length !== 0) {
-    isOption(cliArgs[0].option) ? processMainOptions(cliArgs) : processCommands(cliArgs);
+    isOption(cliArgs[0].option) ? processRootFlags(cliArgs) : processCommands(cliArgs);
   } else {
-    processNoArgs();
+    process.stdout.write(getHelp());
   }
 }
 

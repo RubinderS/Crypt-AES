@@ -4,6 +4,16 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 const extension = '.ncenc';
+const CryptFlags = {
+  sourceS: '-s',
+  sourceL: '--source',
+  pswrdS: '-p',
+  pswrdL: '--password',
+  keepS: '-k',
+  keepL: '--keep',
+  outputS: '-o',
+  outputL: '--output',
+};
 
 function isDir(path: string): boolean {
   return fs.statSync(path).isDirectory();
@@ -29,20 +39,20 @@ function getCryptConfig(cliArgs: CLIArgsType[]): CryptConfigType {
 
   for (let i = 1; i < cliArgs.length; i++) {
     switch (cliArgs[i].option) {
-      case '-s':
-      case '--source':
+      case CryptFlags.sourceS:
+      case CryptFlags.sourceL:
         cryptConfig.srcPath = path.resolve(cliArgs[i].val);
         break;
-      case '-p':
-      case '--password':
+      case CryptFlags.pswrdS:
+      case CryptFlags.pswrdL:
         cryptConfig.pswrd = cliArgs[i].val;
         break;
-      case '-o':
-      case '--output':
+      case CryptFlags.outputS:
+      case CryptFlags.outputL:
         cryptConfig.destPath = path.resolve(cliArgs[i].val);
         break;
-      case '-k':
-      case '--keep':
+      case CryptFlags.keepS:
+      case CryptFlags.keepL:
         cryptConfig.delSrc = false;
         break;
       default:
@@ -52,4 +62,4 @@ function getCryptConfig(cliArgs: CLIArgsType[]): CryptConfigType {
   return cryptConfig;
 }
 
-export {getCryptConfig, getFilesList, extension, isDir};
+export {CryptFlags, getCryptConfig, getFilesList, extension, isDir};
