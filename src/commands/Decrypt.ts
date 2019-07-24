@@ -16,7 +16,7 @@ function decryptCmd(cliArgs: CLIArgsType[]): void {
   const filesList = getFilesList(cryptConfig.srcPath).filter((filePath) => {
     return path.extname(filePath) === extension;
   });
-  process.stdout.write(`Total files to be decrypted: ${filesList.length}\n`);
+  process.stdout.write(`Total files to be decrypted: ${filesList.length}\n\n`);
 
   filesList.forEach((filePath, index) => {
     const extRegex = new RegExp(`${extension}$`, 'g');
@@ -41,7 +41,7 @@ function decryptCmd(cliArgs: CLIArgsType[]): void {
 
     decrypt(filePath, destFilePath, cryptConfig.pswrd, (decryptedFilePath: string) => {
       process.stdout.write(
-        `file ${index + 1} - ${path.basename(decryptedFilePath)} decrypted successfuly`,
+        `file ${index + 1} - ${path.basename(decryptedFilePath)} decrypted successfuly\n`,
       );
       if (cryptConfig.delSrc) {
         fs.unlink(filePath, (err) => {
@@ -49,7 +49,7 @@ function decryptCmd(cliArgs: CLIArgsType[]): void {
             process.stdout.write(`couldn't delete ${path.basename(filePath)}`);
             return;
           }
-          process.stdout.write(`file ${path.basename(filePath)} deleted`);
+          process.stdout.write(`file ${index + 1} - ${path.basename(filePath)} deleted`);
         });
       }
     });
