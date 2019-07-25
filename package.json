@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "node-crypter",
   "scripts": {
-    "test": "jest build/__tests__/.*\\.test.js --runInBand",
+    "test": "jest --verbose build/__tests__/.*\\.test.js --runInBand",
     "build": "tsc"
   },
   "bin": {
