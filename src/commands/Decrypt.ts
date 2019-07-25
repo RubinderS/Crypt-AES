@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import {aes, mkdirIfNotExist} from 'utils';
+import {aes, mkdirIfNotExist} from 'utilities';
 import {CLIArgsType} from '../types';
 import {getCryptConfig, getFilesList, extension, isDir} from './Commons';
 

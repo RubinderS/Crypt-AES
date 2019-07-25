@@ -11,7 +11,7 @@ import {
   decFiles,
   rootFiles,
 } from './Commons';
-import {deleteAll} from 'utils';
+import {deleteAll} from 'utilities';
 import * as fs from 'fs';
 import {extension as ext} from '../commands';
 

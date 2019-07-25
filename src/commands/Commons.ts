@@ -1,5 +1,5 @@
 import {CLIArgsType, CryptConfigType} from '../types';
-import {fileScanner} from 'utils';
+import {fileScanner} from 'utilities';
 import * as fs from 'fs';
 import * as path from 'path';
 

@@ -37,6 +37,6 @@
     "prettier-eslint": "^9.0.0"
   },
   "dependencies": {
-    "utils": "github:rubinder25/utils#master"
+    "utilities": "github:rubinder25/utilities#master"
   }
 }
