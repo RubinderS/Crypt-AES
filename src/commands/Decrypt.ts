@@ -16,8 +16,8 @@ function decryptCmd(cliArgs: CLIArgsType[]): void {
   const filesList = getFilesList(cryptConfig.srcPath).filter((filePath) => {
     return path.extname(filePath) === extension;
   });
-  process.stdout.write(`Total files to be decrypted: ${filesList.length}\n\n`);
 
+  process.stdout.write(`Total files to be decrypted: ${filesList.length}\n\n`);
   filesList.forEach((filePath, index) => {
     const extRegex = new RegExp(`${extension}$`, 'g');
     let destFilePath = '';
@@ -38,7 +38,6 @@ function decryptCmd(cliArgs: CLIArgsType[]): void {
     }
 
     mkdirIfNotExist(path.dirname(destFilePath));
-
     decrypt(filePath, destFilePath, cryptConfig.pswrd, (decryptedFilePath: string) => {
       process.stdout.write(
         `file ${index + 1} - ${path.basename(decryptedFilePath)} decrypted successfuly\n`,

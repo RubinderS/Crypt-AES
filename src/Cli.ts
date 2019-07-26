@@ -21,7 +21,6 @@ function isOption(option: string): boolean {
 
 function getCLIArgs(args: string[]): CLIArgsType[] {
   const cliArgs: CLIArgsType[] = [];
-
   for (let i = 2; i < args.length; i++) {
     const cliArg: CLIArgsType = {
       option: '',

@@ -16,8 +16,8 @@ function encryptCmd(cliArgs: CLIArgsType[]): void {
   const filesList = getFilesList(cryptConfig.srcPath).filter((filePath) => {
     return path.extname(filePath) !== extension;
   });
+  
   process.stdout.write(`Total files to be encrypted: ${filesList.length}\n\n`);
-
   filesList.forEach((filePath, index) => {
     let destFilePath = '';
     if (cryptConfig.destPath) {
@@ -32,7 +32,6 @@ function encryptCmd(cliArgs: CLIArgsType[]): void {
     }
 
     mkdirIfNotExist(path.dirname(destFilePath));
-
     encrypt(filePath, destFilePath, cryptConfig.pswrd, (encryptedFilePath: string) => {
       process.stdout.write(`file ${index + 1} - ${path.basename(encryptedFilePath)} ecrypted\n`);
       if (cryptConfig.delSrc) {
