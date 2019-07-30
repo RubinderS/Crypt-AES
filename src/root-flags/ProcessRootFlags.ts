@@ -15,7 +15,7 @@ function processRootFlags(cliArgs: CLIArgsType[]): void {
         process.stdout.write(getHelp());
         break;
       default:
-        process.stdout.write('Command Not Supported');
+        throw `${cliArg.option} is not a valid option`;
     }
   });
 }

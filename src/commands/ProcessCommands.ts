@@ -13,7 +13,7 @@ function processCommands(cliArgs: CLIArgsType[]): void {
       decryptCmd(cliArgs);
       break;
     default:
-      process.stdout.write('Command Not Supported');
+      throw `${cliArgs[0].option} is not a valid command`;
   }
 }
 

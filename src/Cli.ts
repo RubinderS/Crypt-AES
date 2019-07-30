@@ -40,7 +40,11 @@ function getCLIArgs(args: string[]): CLIArgsType[] {
 function main(): void {
   const cliArgs = getCLIArgs(process.argv);
   if (cliArgs.length !== 0) {
-    isOption(cliArgs[0].option) ? processRootFlags(cliArgs) : processCommands(cliArgs);
+    try {
+      isOption(cliArgs[0].option) ? processRootFlags(cliArgs) : processCommands(cliArgs);
+    } catch (e) {
+      process.stdout.write(`An exception has occurred:\n${e}\n\n`);
+    }
   } else {
     process.stdout.write(getHelp());
   }
