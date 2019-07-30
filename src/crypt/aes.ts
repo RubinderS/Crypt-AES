@@ -46,10 +46,8 @@ function aes() {
   ): void {
     srcFilePath = path.normalize(srcFilePath);
     destFilePath = path.normalize(destFilePath);
-    // Generate a secure, pseudo random initialization vector.
     const initVect = randomBytes(16);
 
-    // Generate a cipher key from the password.
     const CIPHER_KEY = getCipherKey(pswrd);
     const readStream = fs.createReadStream(srcFilePath);
     const gzip = zlib.createGzip();
@@ -89,7 +87,6 @@ function aes() {
       initVect = chunk;
     });
 
-    // Once we’ve got the initialization vector, we can decrypt the file.
     readInitVect.on('close', () => {
       const cipherKey = getCipherKey(pswrd);
       const readStream = fs.createReadStream(srcFilePath, {start: 16});
