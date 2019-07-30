@@ -1,6 +1,6 @@
 import {CLIArgsType} from '../types';
-import {encryptCmd} from './Encrypt';
-import {decryptCmd} from './Decrypt';
+import {encryptCmd} from './encrypt';
+import {decryptCmd} from './decrypt';
 
 function processCommands(cliArgs: CLIArgsType[]): void {
   switch (cliArgs[0].option) {

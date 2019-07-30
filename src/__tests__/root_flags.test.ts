@@ -1,5 +1,5 @@
-import {env, cliPath, cmd} from './Commons';
-import {getVersion, getHelp} from '../root-flags';
+import {env, cliPath, cmd} from './commons';
+import {getVersion, getHelp} from '../root_flags';
 
 describe('Root Flags', () => {
   test('No flags', () => {

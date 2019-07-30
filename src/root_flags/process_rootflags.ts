@@ -1,7 +1,7 @@
 import {CLIArgsType} from '../types';
-import {getVersion} from './Version';
-import {getHelp} from './Help';
-import {RootFlags} from './Commons';
+import {getVersion} from './version';
+import {getHelp} from './help';
+import {RootFlags} from './commons';
 
 function processRootFlags(cliArgs: CLIArgsType[]): void {
   cliArgs.forEach((cliArg) => {

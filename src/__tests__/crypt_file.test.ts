@@ -1,5 +1,5 @@
-import {env, cliPath, cmd, pswrd, encoding, data, dirs, setupFileTests} from './Commons';
-import {deleteAll} from 'utilities';
+import {env, cliPath, cmd, pswrd, encoding, data, dirs, setupFileTests} from './commons';
+import {deleteAll} from '../fs';
 import * as fs from 'fs';
 import * as path from 'path';
 import {extension as ext} from '../commands';

@@ -1,8 +1,9 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import {aes, createDir} from 'utilities';
+import {createDir} from '../fs';
+import {aes} from '../crypt';
 import {CLIArgsType} from '../types';
-import {getCryptConfig, getFilesList, extension, isDir} from './Commons';
+import {getCryptConfig, getFilesList, extension, isDir} from './commons';
 
 function encryptCmd(cliArgs: CLIArgsType[]): void {
   const {encrypt} = aes();
@@ -16,7 +17,7 @@ function encryptCmd(cliArgs: CLIArgsType[]): void {
   const filesList = getFilesList(cryptConfig.srcPath).filter((filePath) => {
     return path.extname(filePath) !== extension;
   });
-  
+
   process.stdout.write(`Total files to be encrypted: ${filesList.length}\n\n`);
   filesList.forEach((filePath, index) => {
     let destFilePath = '';

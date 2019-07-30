@@ -11,7 +11,7 @@
  *
  */
 
-import {processRootFlags, getHelp} from './root-flags';
+import {processRootFlags, getHelp} from './root_flags';
 import {processCommands} from './commands';
 import {CLIArgsType} from './types';
 

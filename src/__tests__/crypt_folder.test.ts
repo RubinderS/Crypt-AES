@@ -10,8 +10,8 @@ import {
   encFiles,
   decFiles,
   rootFiles,
-} from './Commons';
-import {deleteAll} from 'utilities';
+} from './commons';
+import {deleteAll} from '../fs';
 import * as fs from 'fs';
 import {extension as ext} from '../commands';
 
