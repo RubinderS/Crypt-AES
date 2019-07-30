@@ -14,11 +14,13 @@ function getCLIArgs(args: string[]): CLIArgsType[] {
       option: '',
       val: '',
     };
+
     cliArg.option = args[i];
     if (args[i + 1] && !isOption(args[i + 1])) {
       cliArg.val = args[i + 1];
       i++;
     }
+
     cliArgs.push(cliArg);
   }
 
