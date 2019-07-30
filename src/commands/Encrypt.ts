@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import {aes, mkdirIfNotExist} from 'utilities';
+import {aes, createDir} from 'utilities';
 import {CLIArgsType} from '../types';
 import {getCryptConfig, getFilesList, extension, isDir} from './Commons';
 
@@ -31,7 +31,7 @@ function encryptCmd(cliArgs: CLIArgsType[]): void {
       destFilePath = filePath + extension;
     }
 
-    mkdirIfNotExist(path.dirname(destFilePath));
+    createDir(path.dirname(destFilePath));
     encrypt(filePath, destFilePath, cryptConfig.pswrd, (encryptedFilePath: string) => {
       process.stdout.write(`file ${index + 1} - ${path.basename(encryptedFilePath)} ecrypted\n`);
       if (cryptConfig.delSrc) {
