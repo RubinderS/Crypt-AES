@@ -1,53 +1,46 @@
-# node-crypter
+# Node-Crypt
 
-node-crypter
-
-/\*\*
-Cli tool to encrypt files using AES (this line to be improved)
+CLI tool to encrypt files or folders using AES
 
 Usage:-
 
-node-crypt encrypt --source file.txt --password mypass
+```
+node-crypt encrypt|decrypt <options>
+```
+
 or
+
+```
+nc enc|dec <options>
+```
+
+
+
+for example:
+
+```
+node-crypt encrypt --source file.txt --password mypass
+```
+
+or
+
+```
 nc enc -s file.txt -p mypass
+```
 
---version, -v : Version
---help, -h : help
+Options:
 
-Commands:-
-encrypt, enc 
-    --source, -s : Source file or directory
-    --password, -p : password to be used
-    --keep, -k : keep the original file after the ecnryption(default: delete the original file)
-    --output, -o : output directory for the encrypted files (default: same directory)
+> ​    --source, -s <source>:                       source file or directory
+>
+> ​    --password, -p <password>:            password to be used
+>
+> ​    --keep, -k :                                               keep the original file after the operation (optional, default is delete the original file)
+>
+>    --output, -o <ouput directory>:  output directory for the processed files (optional, default is same directory)
 
-decrypt, dec 
-    --source, -s : Source file or directory
-    --password, -p : password to be used
-    --keep, -k : keep the original file after the decryption(default: delete the original file)
-    --output, -o : output directory for the decrypted files (default: same directory)
+For help:
 
+```
+nc -h
+```
 
-
-
-
-(if a directory is selected, all files inside that directory will be encrypted)
-
-
-
-
-
-- encrypt
-- -s <filename or dirname>
-- -p <password>
-- -d(optional delete the files after finish)
-- -noext(optional don't add enc extension and keep the original file name)
-- -out (optional ) <output directory>
--
-- decrypt
-- -s <filename or dirname>
-- -p <password>
-- -d(optional delete the files after finish)
-- -noext(optional check for any file instead of just the -noext files)
-- -out
-- \*/
