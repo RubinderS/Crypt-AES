@@ -1,4 +1,4 @@
-import {CLIArgsType, CryptConfigType} from '../types';
+import {CLIArgsType, NodeCryptConfig} from '../types';
 import {fileScanner} from '../fs';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -29,8 +29,8 @@ function getFilesList(dir: string): string[] {
   return dirList;
 }
 
-function getCryptConfig(cliArgs: CLIArgsType[]): CryptConfigType {
-  const cryptConfig: CryptConfigType = {
+function getCryptConfig(cliArgs: CLIArgsType[]): NodeCryptConfig {
+  const cryptConfig: NodeCryptConfig = {
     srcPath: '',
     pswrd: '',
     destPath: undefined,
