@@ -1,6 +1,6 @@
 # Node-Crypt
 
-CLI tool to encrypt files or folders using AES
+Cli tool to encrypt files or folders using AES
 
 Usage:-
 
