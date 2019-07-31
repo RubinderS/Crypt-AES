@@ -2,7 +2,13 @@
 
 Cli tool to encrypt files or folders using AES
 
-Usage:-
+## Install
+
+```
+npm i node-crypt -g
+```
+
+## Usage:-
 
 ```
 node-crypt encrypt|decrypt <options>
