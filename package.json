@@ -1,7 +1,7 @@
 {
-  "name": "crypter",
+  "name": "node-crypt",
   "version": "1.0.0",
-  "description": "node-crypter",
+  "description": "Cli tool to encrypt files or folders using AES",
   "scripts": {
     "test": "jest --verbose build/__tests__/.*\\.test.js --runInBand",
     "build": "tsc"
@@ -16,7 +16,11 @@
   },
   "keywords": [
     "encryption",
-    "aes"
+    "encrypt",
+    "decryption",
+    "decrypt",
+    "aes",
+    "cli"
   ],
   "author": "Rubinder Singh",
   "license": "MIT",
