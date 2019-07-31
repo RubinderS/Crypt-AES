@@ -1,4 +1,4 @@
-![GitHub](https://img.shields.io/github/license/rubinder25/node-crypt?style=flat-square)![GitHub package.json version](https://img.shields.io/github/package-json/v/rubinder25/node-crypt?style=flat-square) 
+![GitHub](https://img.shields.io/github/license/rubinder25/node-crypt?style=flat-square) ![GitHub package.json version](https://img.shields.io/github/package-json/v/rubinder25/node-crypt?style=flat-square) 
 
 # Node-Crypt
 
