@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import {createDir} from '../fs';
+import {createDirSync} from '../fs';
 import {aes} from '../crypt';
 import {CLIArgsType, NodeCryptConfig} from '../types';
 import {getCryptConfig, getFilesList, extension, isDir} from './commons';
@@ -32,7 +32,7 @@ function ncEncrypt(cryptConfig: NodeCryptConfig): void {
       destFilePath = filePath + extension;
     }
 
-    createDir(path.dirname(destFilePath));
+    createDirSync(path.dirname(destFilePath));
     encryptFile(filePath, destFilePath, cryptConfig.pswrd, (encryptedFilePath: string) => {
       process.stdout.write(`file ${index + 1} - ${path.basename(encryptedFilePath)} ecrypted\n`);
       if (!cryptConfig.keepSrc) {

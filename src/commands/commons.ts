@@ -1,5 +1,5 @@
 import {CLIArgsType, NodeCryptConfig} from '../types';
-import {fileScanner} from '../fs';
+import {fileScannerSync} from '../fs';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -21,7 +21,7 @@ function isDir(path: string): boolean {
 
 function getFilesList(dir: string): string[] {
   const dirList: string[] = [];
-  fileScanner(dir, true, (filePath: string, isDir: boolean) => {
+  fileScannerSync(dir, true, (filePath: string, isDir: boolean) => {
     if (!isDir) {
       dirList.push(path.resolve(filePath));
     }

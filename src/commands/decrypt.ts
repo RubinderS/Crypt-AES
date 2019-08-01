@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import {createDir} from '../fs';
+import {createDirSync} from '../fs';
 import {aes} from '../crypt';
 import {CLIArgsType, NodeCryptConfig} from '../types';
 import {getCryptConfig, getFilesList, extension, isDir} from './commons';
@@ -38,7 +38,7 @@ function ncDecrypt(cryptConfig: NodeCryptConfig): void {
       destFilePath = filePath.replace(extRegex, '');
     }
 
-    createDir(path.dirname(destFilePath));
+    createDirSync(path.dirname(destFilePath));
     decryptFile(filePath, destFilePath, cryptConfig.pswrd, (decryptedFilePath: string) => {
       process.stdout.write(
         `file ${index + 1} - ${path.basename(decryptedFilePath)} decrypted successfuly\n`,

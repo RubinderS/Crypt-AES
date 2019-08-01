@@ -1,12 +1,12 @@
 import {env, cliPath, waitSync, cmd, pswrd, encoding, data, dirs, setupFileTests} from './commons';
-import {deleteAll} from '../fs';
+import {deleteSync} from '../fs';
 import * as fs from 'fs';
 import * as path from 'path';
 import {extension as ext} from '../commands';
 
 describe('Crypt Commands File', () => {
   beforeAll(() => {
-    deleteAll(dirs.rootDir);
+    deleteSync(dirs.rootDir);
     waitSync(500);
   });
 
@@ -15,7 +15,7 @@ describe('Crypt Commands File', () => {
   });
 
   afterEach(() => {
-    deleteAll(dirs.rootDir);
+    deleteSync(dirs.rootDir);
     waitSync(500);
   });
 
@@ -46,7 +46,7 @@ describe('Crypt Commands File', () => {
     expect(fs.existsSync(dirs.fileRootDir)).toBe(true);
     expect(fs.existsSync(dirs.fileRootDir + ext)).toBe(true);
 
-    deleteAll(dirs.fileRootDir);
+    deleteSync(dirs.fileRootDir);
 
     cmd(`${env} ${cliPath} dec -s ${dirs.fileRootDir + ext} -p ${pswrd} -k`);
     expect(fs.existsSync(dirs.fileRootDir)).toBe(true);
