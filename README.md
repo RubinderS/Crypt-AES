@@ -52,3 +52,7 @@ For help:
 nc -h
 ```
 
+## Usage as a module
+
+Node-Crypt can also be used as npm dependency
+
