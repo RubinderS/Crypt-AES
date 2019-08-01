@@ -2,6 +2,7 @@
   "name": "node-crypt",
   "version": "1.0.0",
   "description": "Cli tool to encrypt files or folders using AES",
+  "main": "build/index.js",
   "scripts": {
     "test": "jest --verbose build/__tests__/.*\\.test.js --runInBand",
     "build": "tsc"
