@@ -43,7 +43,7 @@ function ncDecrypt(cryptConfig: NodeCryptConfig): void {
       process.stdout.write(
         `file ${index + 1} - ${path.basename(decryptedFilePath)} decrypted successfuly\n`,
       );
-      if (cryptConfig.delSrc) {
+      if (!cryptConfig.keepSrc) {
         fs.unlink(filePath, (err) => {
           if (err) {
             process.stdout.write(`couldn't delete ${path.basename(filePath)}`);

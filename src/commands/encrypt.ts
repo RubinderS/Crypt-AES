@@ -35,7 +35,7 @@ function ncEncrypt(cryptConfig: NodeCryptConfig): void {
     createDir(path.dirname(destFilePath));
     encryptFile(filePath, destFilePath, cryptConfig.pswrd, (encryptedFilePath: string) => {
       process.stdout.write(`file ${index + 1} - ${path.basename(encryptedFilePath)} ecrypted\n`);
-      if (cryptConfig.delSrc) {
+      if (!cryptConfig.keepSrc) {
         fs.unlink(filePath, (err) => {
           if (err) {
             process.stdout.write(`couldn't delete ${path.basename(filePath)}\n`);

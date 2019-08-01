@@ -34,7 +34,7 @@ function getCryptConfig(cliArgs: CLIArgsType[]): NodeCryptConfig {
     srcPath: '',
     pswrd: '',
     destPath: undefined,
-    delSrc: true,
+    keepSrc: false,
   };
 
   for (let i = 1; i < cliArgs.length; i++) {
@@ -53,7 +53,7 @@ function getCryptConfig(cliArgs: CLIArgsType[]): NodeCryptConfig {
         break;
       case CryptFlags.keepS:
       case CryptFlags.keepL:
-        cryptConfig.delSrc = false;
+        cryptConfig.keepSrc = true;
         break;
       default:
         throw `${cliArgs[i].option} is not a valid option`;
