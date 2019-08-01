@@ -38,7 +38,7 @@ function aes() {
    * @param {string} pswrd
    * @param {function} cbOnFinish
    */
-  function encrypt(
+  function encryptFile(
     srcFilePath: string,
     destFilePath: string,
     pswrd: string,
@@ -71,7 +71,7 @@ function aes() {
    * @param {string} pswrd
    * @param {function} cbOnFinish
    */
-  function decrypt(
+  function decryptFile(
     srcFilePath: string,
     destFilePath: string,
     pswrd: string,
@@ -103,7 +103,7 @@ function aes() {
     });
   }
 
-  return {encrypt, decrypt};
+  return {encryptFile, decryptFile};
 }
 
 export {aes};

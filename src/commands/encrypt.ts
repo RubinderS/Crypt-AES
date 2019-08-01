@@ -6,7 +6,7 @@ import {CLIArgsType} from '../types';
 import {getCryptConfig, getFilesList, extension, isDir} from './commons';
 
 function encryptCmd(cliArgs: CLIArgsType[]): void {
-  const {encrypt} = aes();
+  const {encryptFile} = aes();
   const cryptConfig = getCryptConfig(cliArgs);
   if (cryptConfig.srcPath === '' || cryptConfig.destPath === '') {
     process.stdout.write('Need to pass source path and password\n');
@@ -33,7 +33,7 @@ function encryptCmd(cliArgs: CLIArgsType[]): void {
     }
 
     createDir(path.dirname(destFilePath));
-    encrypt(filePath, destFilePath, cryptConfig.pswrd, (encryptedFilePath: string) => {
+    encryptFile(filePath, destFilePath, cryptConfig.pswrd, (encryptedFilePath: string) => {
       process.stdout.write(`file ${index + 1} - ${path.basename(encryptedFilePath)} ecrypted\n`);
       if (cryptConfig.delSrc) {
         fs.unlink(filePath, (err) => {
