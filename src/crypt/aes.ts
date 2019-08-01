@@ -79,7 +79,6 @@ function aes() {
   ): void {
     srcFilePath = path.normalize(srcFilePath);
     destFilePath = path.normalize(destFilePath);
-    // First, get the initialization vector from the file.
     const readInitVect = fs.createReadStream(srcFilePath, {start: 0, end: 15});
 
     let initVect: any;
