@@ -1,4 +1,4 @@
-import {env, cliPath, cmd, pswrd, encoding, data, dirs, setupFileTests} from './commons';
+import {env, cliPath, waitSync, cmd, pswrd, encoding, data, dirs, setupFileTests} from './commons';
 import {deleteAll} from '../fs';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -7,9 +7,7 @@ import {extension as ext} from '../commands';
 describe('Crypt Commands File', () => {
   beforeAll(() => {
     deleteAll(dirs.rootDir);
-    while (fs.existsSync(dirs.rootDir)) {
-      //
-    }
+    waitSync(500);
   });
 
   beforeEach(() => {
@@ -18,9 +16,7 @@ describe('Crypt Commands File', () => {
 
   afterEach(() => {
     deleteAll(dirs.rootDir);
-    while (fs.existsSync(dirs.rootDir)) {
-      //
-    }
+    waitSync(500);
   });
 
   test('No flags - short commands', () => {

@@ -1,6 +1,7 @@
 import {
   env,
   cliPath,
+  waitSync,
   cmd,
   pswrd,
   encoding,
@@ -18,9 +19,7 @@ import {extension as ext} from '../commands';
 describe('Crypt Commands Folder', () => {
   beforeAll(() => {
     deleteAll(dirs.rootDir);
-    while (fs.existsSync(dirs.rootDir)) {
-      //
-    }
+    waitSync(500);
   });
 
   beforeEach(() => {
@@ -29,9 +28,7 @@ describe('Crypt Commands Folder', () => {
 
   afterEach(() => {
     deleteAll(dirs.rootDir);
-    while (fs.existsSync(dirs.rootDir)) {
-      //
-    }
+    waitSync(500);
   });
 
   test('No flags - short commands', () => {
