@@ -18,6 +18,9 @@ import {extension as ext} from '../commands';
 describe('Crypt Commands Folder', () => {
   beforeAll(() => {
     deleteAll(dirs.rootDir);
+    while (fs.existsSync(dirs.rootDir)) {
+      //
+    }
   });
 
   beforeEach(() => {
@@ -26,6 +29,9 @@ describe('Crypt Commands Folder', () => {
 
   afterEach(() => {
     deleteAll(dirs.rootDir);
+    while (fs.existsSync(dirs.rootDir)) {
+      //
+    }
   });
 
   test('No flags - short commands', () => {
