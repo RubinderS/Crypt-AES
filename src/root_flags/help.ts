@@ -14,7 +14,6 @@ function getHelp(): string {
   --output, -o <ouput directory>:  output directory for the processed files 
                                    (default: same directory)
 
-  For help: nc -h
   `;
 }
 
