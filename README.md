@@ -54,5 +54,9 @@ nc -h
 
 ## Usage as a module
 
-Node-Crypt can also be used as npm dependency
+Node-Crypt can also be used as local npm dependency
+
+```
+import {ncEncrypt, ncDecrypt} from 'node-crypt';
+```
 
