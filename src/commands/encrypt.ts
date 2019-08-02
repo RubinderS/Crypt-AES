@@ -8,7 +8,7 @@ import {getCryptConfig, getFilesList, extension, isDir} from './commons';
 const {encryptFile} = aes();
 
 function ncEncrypt(cryptConfig: NodeCryptConfig): void {
-  if (cryptConfig.srcPath === '' || cryptConfig.destPath === '') {
+  if (cryptConfig.srcPath === '' || cryptConfig.pswrd === '') {
     process.stdout.write('Need to pass source path and password\n');
     process.stdout.write('See help\n');
     return;
