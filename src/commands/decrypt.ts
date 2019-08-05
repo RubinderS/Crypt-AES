@@ -9,8 +9,8 @@ const {decryptFile} = aes();
 
 function ncDecrypt(cryptConfig: NodeCryptConfig): void {
   if (cryptConfig.srcPath === '' || cryptConfig.pswrd === '') {
-    process.stdout.write('Need to pass source path and password');
-    process.stdout.write('See help');
+    process.stdout.write('Need to pass source path and password\n');
+    process.stdout.write('See help\n\n');
     return;
   }
 
