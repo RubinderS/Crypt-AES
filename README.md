@@ -10,7 +10,7 @@ Cli tool to encrypt files or folders using AES
 npm i node-crypt -g
 ```
 
-## Usage:-
+## Usage
 
 ```
 node-crypt encrypt|decrypt <options>
