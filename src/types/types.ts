@@ -1,7 +1,7 @@
 interface NodeCryptConfig {
   srcPath: string;
-  destPath: string | undefined;
   pswrd: string;
+  destPath: string | null;
   keepSrc: boolean;
 }
 

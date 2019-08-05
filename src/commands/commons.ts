@@ -33,7 +33,7 @@ function getCryptConfig(cliArgs: CLIArgsType[]): NodeCryptConfig {
   const cryptConfig: NodeCryptConfig = {
     srcPath: '',
     pswrd: '',
-    destPath: undefined,
+    destPath: null,
     keepSrc: false,
   };
 
