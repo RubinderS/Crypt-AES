@@ -56,7 +56,9 @@ nc -h
 
 Node-Crypt can also be used as local npm dependency
 
-```
+```javascript
 import {ncEncrypt, ncDecrypt} from 'node-crypt';
+
+ncEncrypt({srcPath: './', pswrd: 'mypass', keepSrc: false, destPath: null});
 ```
 
