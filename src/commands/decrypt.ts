@@ -40,16 +40,14 @@ function ncDecrypt(cryptConfig: NodeCryptConfig): void {
 
     createDirSync(path.dirname(destFilePath));
     decryptFile(filePath, destFilePath, cryptConfig.pswrd, (decryptedFilePath: string) => {
-      process.stdout.write(
-        `file ${index + 1} - ${path.basename(decryptedFilePath)} decrypted successfuly\n`,
-      );
+      process.stdout.write(`File ${index + 1} Decrypted - ${path.basename(decryptedFilePath)}\n`);
       if (!cryptConfig.keepSrc) {
         fs.unlink(filePath, (err) => {
           if (err) {
-            process.stdout.write(`couldn't delete ${path.basename(filePath)}`);
+            process.stdout.write(`Couldn't delete ${path.basename(filePath)}\n`);
             return;
           }
-          process.stdout.write(`file ${index + 1} - ${path.basename(filePath)} deleted`);
+          process.stdout.write(`File ${index + 1} Deleted - ${path.basename(filePath)}\n`);
         });
       }
     });

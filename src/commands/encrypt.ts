@@ -34,14 +34,14 @@ function ncEncrypt(cryptConfig: NodeCryptConfig): void {
 
     createDirSync(path.dirname(destFilePath));
     encryptFile(filePath, destFilePath, cryptConfig.pswrd, (encryptedFilePath: string) => {
-      process.stdout.write(`file ${index + 1} - ${path.basename(encryptedFilePath)} ecrypted\n`);
+      process.stdout.write(`File ${index + 1} Encrypted - ${path.basename(encryptedFilePath)}\n`);
       if (!cryptConfig.keepSrc) {
         fs.unlink(filePath, (err) => {
           if (err) {
-            process.stdout.write(`couldn't delete ${path.basename(filePath)}\n`);
+            process.stdout.write(`Couldn't delete ${path.basename(filePath)}\n`);
             return;
           }
-          process.stdout.write(`file ${index + 1} - ${path.basename(filePath)} deleted\n`);
+          process.stdout.write(`File ${index + 1} Deleted - ${path.basename(filePath)}\n`);
         });
       }
     });
