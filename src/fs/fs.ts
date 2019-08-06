@@ -24,8 +24,8 @@ function fileScannerSync(
     if (stats.isDirectory()) {
       if (recursive) {
         fileScannerSync(fullPath, recursive, callback);
-        callback(fullPath, true);
       }
+      callback(fullPath, true);
     } else {
       callback(fullPath, false);
     }
