@@ -19,7 +19,7 @@ nodecrypt encrypt|decrypt [options]
 or
 
 ```
-nc enc|dec <options>
+nc enc|dec [options]
 ```
 
 
