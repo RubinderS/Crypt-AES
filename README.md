@@ -1,19 +1,19 @@
-![GitHub](https://img.shields.io/github/license/rubinder25/node-crypt?style=flat-square) ![GitHub package.json version](https://img.shields.io/github/package-json/v/rubinder25/node-crypt?style=flat-square) 
+![GitHub](https://img.shields.io/github/license/rubinder25/nodecrypt?style=flat-square) ![GitHub package.json version](https://img.shields.io/github/package-json/v/rubinder25/nodecrypt?style=flat-square) 
 
-# Node-Crypt
+# nodecrypt
 
 Cli tool to encrypt files and folders using AES
 
 ## Install
 
 ```
-npm i node-crypt -g
+npm i nodecrypt -g
 ```
 
 ## Usage
 
 ```
-node-crypt encrypt|decrypt [options]
+nodecrypt encrypt|decrypt [options]
 ```
 
 or
@@ -27,7 +27,7 @@ nc enc|dec <options>
 for example:
 
 ```
-node-crypt encrypt --source file.txt --password mypass
+nodecrypt encrypt --source file.txt --password mypass
 ```
 
 or
@@ -51,10 +51,10 @@ nc -h
 
 ## Usage as a module
 
-Node-Crypt can also be used as local npm dependency
+nodecrypt can also be used as local npm dependency
 
 ```javascript
-import {ncEncrypt, ncDecrypt} from 'node-crypt';
+import {ncEncrypt, ncDecrypt} from 'nodecrypt';
 
 ncEncrypt({srcPath: './', pswrd: 'mypass', keepSrc: false, destPath: null});
 ```

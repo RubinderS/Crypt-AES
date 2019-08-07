@@ -1,6 +1,6 @@
 function getHelp(): string {
   return `
-  Usage: node-crypt encrypt|decrypt [options] 
+  Usage: nodecrypt encrypt|decrypt [options] 
                     or 
          nc enc|dec [options]
 
