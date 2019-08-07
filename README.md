@@ -13,7 +13,7 @@ npm i node-crypt -g
 ## Usage
 
 ```
-node-crypt encrypt|decrypt <options>
+node-crypt encrypt|decrypt [options]
 ```
 
 or
