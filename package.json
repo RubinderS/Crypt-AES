@@ -1,5 +1,5 @@
 {
-  "name": "node-crypt",
+  "name": "nodecrypt",
   "version": "1.0.0",
   "description": "Cli tool to encrypt files or folders using AES",
   "main": "build/index.js",
