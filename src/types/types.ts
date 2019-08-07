@@ -1,8 +1,8 @@
 interface NodeCryptConfig {
   srcPath: string;
-  destPath: string | undefined;
   pswrd: string;
-  delSrc: boolean;
+  destPath: string | null;
+  keepSrc: boolean;
 }
 
 interface CLIArgsType {

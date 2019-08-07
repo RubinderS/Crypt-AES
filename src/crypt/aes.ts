@@ -38,7 +38,7 @@ function aes() {
    * @param {string} pswrd
    * @param {function} cbOnFinish
    */
-  function encrypt(
+  function encryptFile(
     srcFilePath: string,
     destFilePath: string,
     pswrd: string,
@@ -71,7 +71,7 @@ function aes() {
    * @param {string} pswrd
    * @param {function} cbOnFinish
    */
-  function decrypt(
+  function decryptFile(
     srcFilePath: string,
     destFilePath: string,
     pswrd: string,
@@ -79,7 +79,6 @@ function aes() {
   ): void {
     srcFilePath = path.normalize(srcFilePath);
     destFilePath = path.normalize(destFilePath);
-    // First, get the initialization vector from the file.
     const readInitVect = fs.createReadStream(srcFilePath, {start: 0, end: 15});
 
     let initVect: any;
@@ -103,7 +102,7 @@ function aes() {
     });
   }
 
-  return {encrypt, decrypt};
+  return {encryptFile, decryptFile};
 }
 
 export {aes};

@@ -1,5 +1,5 @@
 import {CLIArgsType, NodeCryptConfig} from '../types';
-import {fileScanner} from '../fs';
+import {fileScannerSync} from '../fs';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -21,7 +21,7 @@ function isDir(path: string): boolean {
 
 function getFilesList(dir: string): string[] {
   const dirList: string[] = [];
-  fileScanner(dir, true, (filePath: string, isDir: boolean) => {
+  fileScannerSync(dir, true, (filePath: string, isDir: boolean) => {
     if (!isDir) {
       dirList.push(path.resolve(filePath));
     }
@@ -33,8 +33,8 @@ function getCryptConfig(cliArgs: CLIArgsType[]): NodeCryptConfig {
   const cryptConfig: NodeCryptConfig = {
     srcPath: '',
     pswrd: '',
-    destPath: undefined,
-    delSrc: true,
+    destPath: null,
+    keepSrc: false,
   };
 
   for (let i = 1; i < cliArgs.length; i++) {
@@ -53,7 +53,7 @@ function getCryptConfig(cliArgs: CLIArgsType[]): NodeCryptConfig {
         break;
       case CryptFlags.keepS:
       case CryptFlags.keepL:
-        cryptConfig.delSrc = false;
+        cryptConfig.keepSrc = true;
         break;
       default:
         throw `${cliArgs[i].option} is not a valid option`;

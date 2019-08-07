@@ -1,16 +1,16 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import {createDir} from '../fs';
+import {createDirSync} from '../fs';
 import {aes} from '../crypt';
-import {CLIArgsType} from '../types';
+import {CLIArgsType, NodeCryptConfig} from '../types';
 import {getCryptConfig, getFilesList, extension, isDir} from './commons';
 
-function encryptCmd(cliArgs: CLIArgsType[]): void {
-  const {encrypt} = aes();
-  const cryptConfig = getCryptConfig(cliArgs);
-  if (cryptConfig.srcPath === '' || cryptConfig.destPath === '') {
+const {encryptFile} = aes();
+
+function ncEncrypt(cryptConfig: NodeCryptConfig): void {
+  if (cryptConfig.srcPath === '' || cryptConfig.pswrd === '') {
     process.stdout.write('Need to pass source path and password\n');
-    process.stdout.write('See help\n');
+    process.stdout.write('See help\n\n');
     return;
   }
 
@@ -32,20 +32,25 @@ function encryptCmd(cliArgs: CLIArgsType[]): void {
       destFilePath = filePath + extension;
     }
 
-    createDir(path.dirname(destFilePath));
-    encrypt(filePath, destFilePath, cryptConfig.pswrd, (encryptedFilePath: string) => {
-      process.stdout.write(`file ${index + 1} - ${path.basename(encryptedFilePath)} ecrypted\n`);
-      if (cryptConfig.delSrc) {
+    createDirSync(path.dirname(destFilePath));
+    encryptFile(filePath, destFilePath, cryptConfig.pswrd, (encryptedFilePath: string) => {
+      process.stdout.write(`File ${index + 1} Encrypted - ${path.basename(encryptedFilePath)}\n`);
+      if (!cryptConfig.keepSrc) {
         fs.unlink(filePath, (err) => {
           if (err) {
-            process.stdout.write(`couldn't delete ${path.basename(filePath)}\n`);
+            process.stdout.write(`Couldn't delete ${path.basename(filePath)}\n`);
             return;
           }
-          process.stdout.write(`file ${index + 1} - ${path.basename(filePath)} deleted\n`);
+          process.stdout.write(`File ${index + 1} Deleted - ${path.basename(filePath)}\n`);
         });
       }
     });
   });
 }
 
-export {encryptCmd};
+function encryptCmd(cliArgs: CLIArgsType[]): void {
+  const cryptConfig = getCryptConfig(cliArgs);
+  ncEncrypt(cryptConfig);
+}
+
+export {encryptCmd, ncEncrypt};

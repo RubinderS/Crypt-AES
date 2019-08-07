@@ -2,6 +2,13 @@ import {execSync} from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
 
+function waitSync(time: number): void {
+  const currTime = new Date().getTime();
+  while (new Date().getTime() - currTime <= time) {
+    //
+  }
+}
+
 function cmd(command: string): string {
   let out = '';
   try {
@@ -72,6 +79,7 @@ const decFiles = [
 ];
 
 export {
+  waitSync,
   cmd,
   env,
   encoding,

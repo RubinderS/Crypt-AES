@@ -1,6 +1,7 @@
 import {
   env,
   cliPath,
+  waitSync,
   cmd,
   pswrd,
   encoding,
@@ -11,13 +12,14 @@ import {
   decFiles,
   rootFiles,
 } from './commons';
-import {deleteAll} from '../fs';
+import {deleteSync} from '../fs';
 import * as fs from 'fs';
 import {extension as ext} from '../commands';
 
 describe('Crypt Commands Folder', () => {
   beforeAll(() => {
-    deleteAll(dirs.rootDir);
+    deleteSync(dirs.rootDir);
+    waitSync(500);
   });
 
   beforeEach(() => {
@@ -25,7 +27,8 @@ describe('Crypt Commands Folder', () => {
   });
 
   afterEach(() => {
-    deleteAll(dirs.rootDir);
+    deleteSync(dirs.rootDir);
+    waitSync(500);
   });
 
   test('No flags - short commands', () => {
@@ -48,7 +51,7 @@ describe('Crypt Commands Folder', () => {
     rootFiles.forEach((file) => {
       expect(fs.existsSync(file)).toBe(true);
       expect(fs.existsSync(file + ext)).toBe(true);
-      deleteAll(file);
+      deleteSync(file);
     });
 
     cmd(`${env} ${cliPath} decrypt --source ${dirs.rootDir} --password ${pswrd} --keep`);

@@ -6,7 +6,7 @@ import * as path from 'path';
  * and calls a callback function
  * @param {string} destPath path of directory excluding fileName
  */
-function fileScanner(
+function fileScannerSync(
   dirPath: string,
   recursive: boolean,
   callback: (fullPath: string, isDirectory: boolean) => void,
@@ -23,9 +23,9 @@ function fileScanner(
     const stats = fs.statSync(fullPath);
     if (stats.isDirectory()) {
       if (recursive) {
-        fileScanner(fullPath, recursive, callback);
-        callback(fullPath, true);
+        fileScannerSync(fullPath, recursive, callback);
       }
+      callback(fullPath, true);
     } else {
       callback(fullPath, false);
     }
@@ -37,9 +37,9 @@ function fileScanner(
  * and deletes all its subfolders and files recursively
  * @param {string} destPath path of directory
  */
-function deleteAll(path: string): void {
+function deleteSync(path: string): void {
   if (fs.existsSync(path)) {
-    fileScanner(path, true, (srcFilePath, isDirectory): void => {
+    fileScannerSync(path, true, (srcFilePath, isDirectory): void => {
       if (!isDirectory) {
         fs.unlinkSync(srcFilePath);
       } else {
@@ -61,7 +61,7 @@ function deleteAll(path: string): void {
  * creates a directory if it doesn't exist
  * @param {string} destPath path of directory excluding fileName
  */
-function createDir(destPath: string): void {
+function createDirSync(destPath: string): void {
   destPath = path.normalize(destPath + path.sep);
 
   const dirs = destPath.split(path.sep);
@@ -76,4 +76,4 @@ function createDir(destPath: string): void {
   });
 }
 
-export {deleteAll, fileScanner, createDir};
+export {deleteSync, fileScannerSync, createDirSync};
