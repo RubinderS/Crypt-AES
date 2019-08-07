@@ -37,7 +37,7 @@ nc enc -s file.txt -p mypass
 ```
 
 | Option                          | Description                                                  |
-| ------------------------------- | ------------------------------------------------------------ |
+| :------------------------------ | :----------------------------------------------------------- |
 | --source, -s <source>:          | source file or directory                                     |
 | --password, -p <password>:      | password to be used                                          |
 | --keep, -k :                    | keep the original file after the operation <br />(optional, default is delete the original file) |
