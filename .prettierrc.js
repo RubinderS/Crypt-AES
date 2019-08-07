@@ -7,5 +7,4 @@ module.exports = {
   useTabs: false,
   arrowParens: 'always',
   singleQuote: true,
-  trailingComma: 'all',
 };
