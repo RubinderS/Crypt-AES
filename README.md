@@ -36,15 +36,14 @@ or
 nc enc -s file.txt -p mypass
 ```
 
-Options:
+### Options:
 
-> ​    --source, -s <source>:                       source file or directory
->
-> ​    --password, -p <password>:            password to be used
->
-> ​    --keep, -k :                                               keep the original file after the operation (optional, default is delete the original file)
->
->    --output, -o <ouput directory>:  output directory for the processed files (optional, default is same directory)
+|                                 |                                                              |
+| ------------------------------- | ------------------------------------------------------------ |
+| --source, -s <source>:          | source file or directory                                     |
+| --password, -p <password>:      | password to be used                                          |
+| --keep, -k :                    | keep the original file after the operation <br />(optional, default is delete the original file) |
+| --output, -o <ouput directory>: | output directory for the processed files <br />(optional, default is same directory) |
 
 For help:
 
