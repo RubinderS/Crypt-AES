@@ -1,6 +1,6 @@
 ![GitHub](https://img.shields.io/github/license/rubinder25/nodecrypt?style=flat-square) ![GitHub package.json version](https://img.shields.io/github/package-json/v/rubinder25/nodecrypt?style=flat-square) 
 
-# nodecrypt
+# NodeCrypt
 
 Cli tool to encrypt files and folders using AES
 
