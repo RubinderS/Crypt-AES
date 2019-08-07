@@ -36,9 +36,7 @@ or
 nc enc -s file.txt -p mypass
 ```
 
-### Options:
-
-|                                 |                                                              |
+| Option                          | Description                                                  |
 | ------------------------------- | ------------------------------------------------------------ |
 | --source, -s <source>:          | source file or directory                                     |
 | --password, -p <password>:      | password to be used                                          |
