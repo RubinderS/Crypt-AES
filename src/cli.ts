@@ -7,7 +7,7 @@ function isOption(option: string): boolean {
   return option.charAt(0) === '-';
 }
 
-function getCLIArgs(args: string[]): CLIArgsType[] {
+function parseCLIArgs(args: string[]): CLIArgsType[] {
   const cliArgs: CLIArgsType[] = [];
   for (let i = 2; i < args.length; i++) {
     const cliArg: CLIArgsType = {
@@ -28,7 +28,7 @@ function getCLIArgs(args: string[]): CLIArgsType[] {
 }
 
 function main(): void {
-  const cliArgs = getCLIArgs(process.argv);
+  const cliArgs = parseCLIArgs(process.argv);
   if (cliArgs.length !== 0) {
     try {
       isOption(cliArgs[0].option) ? processRootFlags(cliArgs) : processCommands(cliArgs);
