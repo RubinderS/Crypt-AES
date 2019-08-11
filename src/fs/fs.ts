@@ -1,11 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-/**
- * scan all files and folders of directory recursively
- * and calls a callback function
- * @param {string} destPath path of directory excluding fileName
- */
 function fileScannerSync(
   dirPath: string,
   recursive: boolean,
@@ -32,11 +27,6 @@ function fileScannerSync(
   });
 }
 
-/**
- * deletes a file or a directory itself
- * and deletes all its subfolders and files recursively
- * @param {string} destPath path of directory
- */
 function deleteSync(path: string): void {
   if (fs.existsSync(path)) {
     fileScannerSync(path, true, (srcFilePath, isDirectory): void => {
@@ -57,10 +47,6 @@ function deleteSync(path: string): void {
   }
 }
 
-/**
- * creates a directory if it doesn't exist
- * @param {string} destPath path of directory excluding fileName
- */
 function createDirSync(destPath: string): void {
   destPath = path.normalize(destPath + path.sep);
 
