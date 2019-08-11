@@ -5,7 +5,8 @@
   "main": "build/index.js",
   "scripts": {
     "test": "jest --verbose build/__tests__/.*\\.test.js --runInBand",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
   },
   "bin": {
     "nodecrypt": "build/Cli.js",
