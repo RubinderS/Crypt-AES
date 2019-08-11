@@ -20,13 +20,13 @@ function isDir(path: string): boolean {
 }
 
 function getFilesList(dir: string): string[] {
-  const dirList: string[] = [];
+  const filesList: string[] = [];
   fileScannerSync(dir, true, (filePath: string, isDir: boolean) => {
     if (!isDir) {
-      dirList.push(path.resolve(filePath));
+      filesList.push(path.resolve(filePath));
     }
   });
-  return dirList;
+  return filesList;
 }
 
 function getCryptConfig(cliArgs: CLIArgsType[]): NodeCryptConfig {
