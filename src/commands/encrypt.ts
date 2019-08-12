@@ -7,7 +7,7 @@ import {getCryptConfig, getFilesList, extension, isDir} from './commons';
 
 const {encryptFile} = aes();
 
-function caesEncrypt(cryptConfig: CryptAESConfig): void {
+function encrypt(cryptConfig: CryptAESConfig): void {
   if (cryptConfig.srcPath === '' || cryptConfig.pswrd === '') {
     process.stdout.write('Need to pass source path and password\n');
     process.stdout.write('See help\n\n');
@@ -50,7 +50,7 @@ function caesEncrypt(cryptConfig: CryptAESConfig): void {
 
 function encryptCmd(cliArgs: CLIArgsType[]): void {
   const cryptConfig = getCryptConfig(cliArgs);
-  caesEncrypt(cryptConfig);
+  encrypt(cryptConfig);
 }
 
-export {encryptCmd, caesEncrypt};
+export {encryptCmd, encrypt};

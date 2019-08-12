@@ -52,7 +52,7 @@ c-aes -h
 crypt-aes can also be used as local npm dependency
 
 ```javascript
-import {caesEncrypt, caesDecrypt} from 'crypt-aes';
+import {encrypt, decrypt} from 'crypt-aes';
 
-caesEncrypt({srcPath: './', pswrd: 'mypass', keepSrc: false, destPath: null});
+encrypt({srcPath: './', pswrd: 'mypass', keepSrc: false, destPath: null});
 ```
