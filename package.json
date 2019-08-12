@@ -1,6 +1,6 @@
 {
   "name": "crypt-aes",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Cli tool to encrypt files or folders using AES",
   "main": "build/index.js",
   "scripts": {
