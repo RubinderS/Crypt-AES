@@ -1,4 +1,4 @@
-interface NodeCryptConfig {
+interface CryptAESConfig {
   srcPath: string;
   pswrd: string;
   destPath: string | null;
@@ -10,4 +10,4 @@ interface CLIArgsType {
   val: string;
 }
 
-export {NodeCryptConfig, CLIArgsType};
+export {CryptAESConfig, CLIArgsType};

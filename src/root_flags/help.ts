@@ -1,8 +1,8 @@
 function getHelp(): string {
   return `
-  Usage: nodecrypt encrypt|decrypt [options] 
+  Usage: crypt-aes encrypt|decrypt [options] 
                     or 
-         nc enc|dec [options]
+         c-aes enc|dec [options]
 
 
   Options:

@@ -1,6 +1,6 @@
 {
-  "name": "nodecrypt",
-  "version": "1.0.0",
+  "name": "crypt-aes",
+  "version": "0.0.0",
   "description": "Cli tool to encrypt files or folders using AES",
   "main": "build/index.js",
   "scripts": {
@@ -9,12 +9,12 @@
     "prepublishOnly": "npm run build"
   },
   "bin": {
-    "nodecrypt": "build/Cli.js",
-    "nc": "build/Cli.js"
+    "crypt-aes": "build/Cli.js",
+    "c-aes": "build/Cli.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Rubinder25/NodeCrypt.git"
+    "url": "git+https://github.com/Rubinder25/CryptAes.git"
   },
   "keywords": [
     "encryption",
@@ -27,9 +27,9 @@
   "author": "Rubinder Singh",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Rubinder25/NodeCrypt/issues"
+    "url": "https://github.com/Rubinder25/CryptAes/issues"
   },
-  "homepage": "https://github.com/Rubinder25/NodeCrypt#readme",
+  "homepage": "https://github.com/Rubinder25/CryptAes#readme",
   "devDependencies": {
     "@types/jest": "^24.0.15",
     "@types/node": "^12.6.8",

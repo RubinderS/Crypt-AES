@@ -1,9 +1,9 @@
-import {CLIArgsType, NodeCryptConfig} from '../types';
+import {CLIArgsType, CryptAESConfig} from '../types';
 import {fileScannerSync} from '../fs';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const extension = '.ncenc';
+const extension = '.caes';
 const CryptFlags = {
   sourceS: '-s',
   sourceL: '--source',
@@ -29,8 +29,8 @@ function getFilesList(dir: string): string[] {
   return filesList;
 }
 
-function getCryptConfig(cliArgs: CLIArgsType[]): NodeCryptConfig {
-  const cryptConfig: NodeCryptConfig = {
+function getCryptConfig(cliArgs: CLIArgsType[]): CryptAESConfig {
+  const cryptConfig: CryptAESConfig = {
     srcPath: '',
     pswrd: '',
     destPath: null,

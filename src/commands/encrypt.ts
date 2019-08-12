@@ -2,12 +2,12 @@ import * as path from 'path';
 import * as fs from 'fs';
 import {createDirSync} from '../fs';
 import {aes} from '../crypt';
-import {CLIArgsType, NodeCryptConfig} from '../types';
+import {CLIArgsType, CryptAESConfig} from '../types';
 import {getCryptConfig, getFilesList, extension, isDir} from './commons';
 
 const {encryptFile} = aes();
 
-function ncEncrypt(cryptConfig: NodeCryptConfig): void {
+function caesEncrypt(cryptConfig: CryptAESConfig): void {
   if (cryptConfig.srcPath === '' || cryptConfig.pswrd === '') {
     process.stdout.write('Need to pass source path and password\n');
     process.stdout.write('See help\n\n');
@@ -50,7 +50,7 @@ function ncEncrypt(cryptConfig: NodeCryptConfig): void {
 
 function encryptCmd(cliArgs: CLIArgsType[]): void {
   const cryptConfig = getCryptConfig(cliArgs);
-  ncEncrypt(cryptConfig);
+  caesEncrypt(cryptConfig);
 }
 
-export {encryptCmd, ncEncrypt};
+export {encryptCmd, caesEncrypt};
