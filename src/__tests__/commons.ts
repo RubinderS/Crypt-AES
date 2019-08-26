@@ -21,7 +21,7 @@ function cmd(command: string): string {
 
 const env = `node`;
 const encoding = `utf-8`;
-const cliPath = 'build/Cli';
+const cliPath = 'build/cli.js';
 const pswrd = `"P@$WR|)"`;
 const data = `The quick brown fox jumps over the lazy dog`;
 
