@@ -1,6 +1,6 @@
 ![GitHub](https://img.shields.io/github/license/rubinder25/nodecrypt?style=flat-square) ![GitHub package.json version](https://img.shields.io/github/package-json/v/rubinder25/nodecrypt?style=flat-square)
 
-[![Actions Status](https://github.com/rubinder25/crypt-aes/workflows/Node%20CI/badge.svg?style=flat-square)](https://github.com/rubinder25/crypt-aes/workflows/Node%20CI/badge.svg?style=flat-square)
+[![Actions Status](https://github.com/rubinder25/crypt-aes/workflows/Node%20CI/badge.svg)](https://github.com/rubinder25/crypt-aes/workflows/Node%20CI/badge.svg)
 
 # Crypt-AES
 
