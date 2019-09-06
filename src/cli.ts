@@ -12,12 +12,12 @@ function parseCLIArgs(args: string[]): CLIArgsType[] {
   for (let i = 0; i < args.length; i++) {
     const cliArg: CLIArgsType = {
       option: '',
-      val: '',
+      value: '',
     };
 
     cliArg.option = args[i];
     if (args[i + 1] && !isOption(args[i + 1])) {
-      cliArg.val = args[i + 1];
+      cliArg.value = args[i + 1];
       i++;
     }
 

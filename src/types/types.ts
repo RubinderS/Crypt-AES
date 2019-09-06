@@ -7,7 +7,7 @@ interface CryptAESConfig {
 
 interface CLIArgsType {
   option: string;
-  val: string;
+  value: string;
 }
 
 export {CryptAESConfig, CLIArgsType};

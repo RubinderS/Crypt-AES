@@ -41,15 +41,15 @@ function getCryptConfig(cliArgs: CLIArgsType[]): CryptAESConfig {
     switch (cliArgs[i].option) {
       case CryptFlags.sourceS:
       case CryptFlags.sourceL:
-        cryptConfig.srcPath = path.resolve(cliArgs[i].val);
+        cryptConfig.srcPath = path.resolve(cliArgs[i].value);
         break;
       case CryptFlags.pswrdS:
       case CryptFlags.pswrdL:
-        cryptConfig.pswrd = cliArgs[i].val;
+        cryptConfig.pswrd = cliArgs[i].value;
         break;
       case CryptFlags.outputS:
       case CryptFlags.outputL:
-        cryptConfig.destPath = path.resolve(cliArgs[i].val);
+        cryptConfig.destPath = path.resolve(cliArgs[i].value);
         break;
       case CryptFlags.keepS:
       case CryptFlags.keepL:
