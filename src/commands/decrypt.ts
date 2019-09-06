@@ -39,8 +39,8 @@ function decrypt(cryptConfig: CryptAESConfig): void {
     }
 
     createDirSync(path.dirname(destFilePath));
-    decryptFile(filePath, destFilePath, cryptConfig.pswrd, (decryptedFilePath: string) => {
-      process.stdout.write(`File ${index + 1} Decrypted - ${path.basename(decryptedFilePath)}\n`);
+    decryptFile(filePath, destFilePath, cryptConfig.pswrd, () => {
+      process.stdout.write(`File ${index + 1} Decrypted - ${path.basename(destFilePath)}\n`);
       if (!cryptConfig.keepSrc) {
         fs.unlink(filePath, (err) => {
           if (err) {

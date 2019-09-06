@@ -33,8 +33,8 @@ function encrypt(cryptConfig: CryptAESConfig): void {
     }
 
     createDirSync(path.dirname(destFilePath));
-    encryptFile(filePath, destFilePath, cryptConfig.pswrd, (encryptedFilePath: string) => {
-      process.stdout.write(`File ${index + 1} Encrypted - ${path.basename(encryptedFilePath)}\n`);
+    encryptFile(filePath, destFilePath, cryptConfig.pswrd, () => {
+      process.stdout.write(`File ${index + 1} Encrypted - ${path.basename(destFilePath)}\n`);
       if (!cryptConfig.keepSrc) {
         fs.unlink(filePath, (err) => {
           if (err) {

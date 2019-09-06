@@ -42,7 +42,7 @@ function aes() {
     srcFilePath: string,
     destFilePath: string,
     pswrd: string,
-    cbOnFinish: (destSafeFilePath: string) => void,
+    cbOnFinish: () => void,
   ): void {
     srcFilePath = path.normalize(srcFilePath);
     destFilePath = path.normalize(destFilePath);
@@ -55,7 +55,7 @@ function aes() {
     const appendInitVect = new AppendInitVect(initVect);
     const writeStream = fs.createWriteStream(destFilePath);
     writeStream.on('finish', () => {
-      cbOnFinish(destFilePath);
+      cbOnFinish();
     });
     readStream
       .pipe(gzip)
@@ -75,7 +75,7 @@ function aes() {
     srcFilePath: string,
     destFilePath: string,
     pswrd: string,
-    cbOnFinish: (destFilePath: string) => void,
+    cbOnFinish: () => void,
   ): void {
     srcFilePath = path.normalize(srcFilePath);
     destFilePath = path.normalize(destFilePath);
@@ -93,7 +93,7 @@ function aes() {
       const unzip = zlib.createUnzip();
       const writeStream = fs.createWriteStream(destFilePath, {encoding: 'binary'});
       writeStream.on('finish', () => {
-        cbOnFinish(destFilePath);
+        cbOnFinish();
       });
       readStream
         .pipe(decipher)
