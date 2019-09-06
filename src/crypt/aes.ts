@@ -91,7 +91,7 @@ function aes() {
       const readStream = fs.createReadStream(srcFilePath, {start: 16});
       const decipher = createDecipheriv('aes256', cipherKey, initVect);
       const unzip = zlib.createUnzip();
-      const writeStream = fs.createWriteStream(destFilePath);
+      const writeStream = fs.createWriteStream(destFilePath, {encoding: 'binary'});
       writeStream.on('finish', () => {
         cbOnFinish(destFilePath);
       });
